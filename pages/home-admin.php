@@ -14,53 +14,53 @@ include('../functions/type.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../assets/bootstrap/bootstrap.min.css">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-</head>
+    <link rel="stylesheet" href="../pages/style.css">
 <body>
 
-    <div class="container-fluid">
-        <div class="row" style="height:100vh;">
-        <div class="col-sm-1 bg-dark" >
-        <div class="left d-flex flex-column justify-content-between align-items-center" style="overflow:hidden; height: 100%;">
-    <ul class="nav nav-pills flex-column mt-3 text-center">
-        <li class="nav-item m-auto pt-3">
-            <a href="home-admin.php" class="nav-link" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
-                <div class="d-flex align-items-center">
-                    <i class="bi bi-house-fill h3 text-light"></i>
-                    <label class="text-light ml-2">Home</label>
-                </div>
-            </a>
-        </li>
-        <li class="nav-item m-auto pt-3">
-            <a href="#" class="nav-link" title="" data-bs-toggle="tooltip" data-bs-placement="right">
-                <div class="d-flex align-items-center">
-                    <i class="bi bi-person-circle h3 text-light"></i>
-                    <label class="text-light ml-2">Profile</label>
-                </div>
-            </a>
-        </li>
-    </ul>
-    <ul class="nav nav-pills mt-auto text-center">
-        <li class="nav-item m-auto pt-3">
-            <a href="#" class="nav-link" title="" data-bs-toggle="tooltip" data-bs-placement="right">
-                <div class="d-flex align-items-center">
-                    <i class="bi bi-box-arrow-left h3 text-light"></i>
-                    <label class="text-light ml-2">Logout</label>
-                </div>
-            </a>
-        </li>
-    </ul>
-</div>
-
-
+<div class="wrapper">
+<aside id="sidebar" class="bg-dark">
+    <div class="d-flex">
+        <button class="toggle-btn" type="button">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="sidebar-logo">
+            <a href="#">Menu</a>
         </div>
+    </div>
+    <ul class="sidebar-nav">
+        <li class="sidebar-item">
+            <a href="../pages/home-admin.php" class="sidebar-link">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="#" class="sidebar-link">
+                <i class="bi bi-person-circle"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+    </ul>
+    <div class="sidebar-footer mt-auto"> <!-- Added mt-auto to push the footer to the bottom -->
+        <a href="#" class="sidebar-link">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</aside>
+
+        <div class="container-fluid" style="overflow:hidden; height: 100%;">
+       
+        <div class="row" style="height:100vh;">
+       
+
+
         <div class="col-sm-3 bg-secondary text-light">
-                <div class="middle" style="overflow:hidden; height: 100%;">
-                    <h3 class="mb-4 text-center">Submit Capstone <i class="fas fa-solid fa-star"></i></h3>
+                <div class="middle mt-3" style="overflow:hidden; height: 100%;">
                     <form method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="action" value="add">
                         <input type="hidden" name="edit_id" id="edit_id" value="">
@@ -84,15 +84,19 @@ include('../functions/type.php');
                             <label for="pdf_file">PDF File:</label>
                             <input type="file" class="form-control bg-secondary border-0 text-light" id="pdf_file" name="pdf_file" accept=".pdf" required>
                         </div>
-                        <button type="submit" class="btn btn-dark" name="submit" style="float:right;">Add Capstone</button>
+                        <button type="submit" class="btn btn-dark m-1" name="submit" style="float:right;">Add Capstone</button>
                     </form>
                 </div>
             </div>
-
+            <div class="col-sm-9" style="overflow-y:auto; height: 100%;">
             
-            <div class="col-sm-8" style="overflow-y:auto; height: 100%;">
     <div class="scrollable-right">
         <div class="sticky-top"  style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <div class="row bg-dark">
+          
+          <div class="h3 text-light text-center p-1">Capstone Manager</div>
+      
+            </div>
             <form method="post"> 
                 <div class="row bg-light">
                     <div class="col-sm-12 text-center">
@@ -108,7 +112,7 @@ include('../functions/type.php');
                 </div>
 
                 <!-- Date filter -->
-                <div class="row bg-light">
+                <div class="row bg-light pb-3">
                     <div class="col-sm-6">
                         <div class="form-group d-flex">
                             <label class="mr-2">From</label>
@@ -119,7 +123,7 @@ include('../functions/type.php');
                         <div class="form-group d-flex">
                             <label class="mr-2">To</label>
                             <input type="date" name="to_date" class="form-control" value="<?php echo (isset($todate))? $todate: null;?>">
-                            <div class="form-group ml-3">
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-dark">Apply</button>
                             </div>
                         </div>
@@ -164,9 +168,9 @@ include('../functions/type.php');
                                     <?php endif; ?>
                                     <div class="mt-3 d-flex justify-content-end">
                                         <!-- Edit button -->
-                                        <button type="button" class="btn btn-dark edit-btn mr-2" onclick="openEditModal('<?php echo $capstone['id']; ?>', '<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>')">Edit</button>
+                                        <button type="button" class="btn btn-dark edit-btn m-1" onclick="openEditModal('<?php echo $capstone['id']; ?>', '<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>')">Edit</button>
                                         <!-- Delete button -->
-                                        <a href="?delete=<?php echo $capstone['id']; ?>" class="btn btn-dark" onclick="propa(event);">Delete</a>
+                                        <a href="?delete=<?php echo $capstone['id']; ?>" class="btn btn-dark m-1" onclick="propa(event);">Delete</a>
                                     </div>
                                 </div>
                             </div>
@@ -261,6 +265,13 @@ include('../functions/type.php');
     </div>
 </div>
 
+       
+
+
+
+
+
+ 
 
 </body>
 <script>
@@ -306,24 +317,16 @@ function openViewModal(title, author, date_published, abstract, event) {
     var bsModal = new bootstrap.Modal(viewModal);
     bsModal.show();
 }
+const hamBurger = document.querySelector(".toggle-btn");
 
+hamBurger.addEventListener("click", function () {
+  document.querySelector("#sidebar").classList.toggle("expand");
+});
 
 </script>
-<style>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
 
-    .card:hover {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transform: translateY(-5px);
-        transition: all 0.4s ease;
-    }
-    .card{
-        border-radius: 20px;
-    }
-    .btn{
-        border-radius:10px;
-    }
-    .col-sm-3{
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-</style>
+
 </html>
