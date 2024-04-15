@@ -14,76 +14,50 @@ include('../functions/type.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/bootstrap/bootstrap.min.css">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+</head>
 <body>
-       <!-- Dark Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">Capstone Management</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDark" aria-controls="navbarNavDark" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-      
-    </div>
-</nav>
 
-
-    <!-- sidebar  -->
-
-
-<div class="wrapper">
-        <aside id="sidebar">
-            <div class="d-flex">
-                <button class="toggle-btn" type="button">
-                    <i class="lni lni-grid-alt"></i>
-                </button>
-                <div class="sidebar-logo">
-                    <a href="#">Menu</a>
-                </div>
-            </div>
-            <ul class="sidebar-nav">
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-home"></i>
-                        <span>Profile</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-menu"></i>
-                        <span>category</span>
-                    </a>
-                </li>
-              
-             
-               
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-cog"></i>
-                        <span>Setting</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="sidebar-footer">
-                <a href="#" class="sidebar-link">
-                    <i class="lni lni-exit"></i>
-                    <span>Logout</span>
-                </a>
-            </div>
-        </aside>
-        <div class="container-fluid">
+    <div class="container-fluid">
         <div class="row" style="height:100vh;">
-       
-    
+        <div class="col-sm-1 bg-dark" >
+        <div class="left d-flex flex-column justify-content-between align-items-center" style="overflow:hidden; height: 100%;">
+    <ul class="nav nav-pills flex-column mt-3 text-center">
+        <li class="nav-item m-auto pt-3">
+            <a href="home-admin.php" class="nav-link" title="" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-original-title="Home">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-house-fill h3 text-light"></i>
+                    <label class="text-light ml-2">Home</label>
+                </div>
+            </a>
+        </li>
+        <li class="nav-item m-auto pt-3">
+            <a href="#" class="nav-link" title="" data-bs-toggle="tooltip" data-bs-placement="right">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-person-circle h3 text-light"></i>
+                    <label class="text-light ml-2">Profile</label>
+                </div>
+            </a>
+        </li>
+    </ul>
+    <ul class="nav nav-pills mt-auto text-center">
+        <li class="nav-item m-auto pt-3">
+            <a href="#" class="nav-link" title="" data-bs-toggle="tooltip" data-bs-placement="right">
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-box-arrow-left h3 text-light"></i>
+                    <label class="text-light ml-2">Logout</label>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
 
 
-
+        </div>
         <div class="col-sm-3 bg-secondary text-light">
                 <div class="middle" style="overflow:hidden; height: 100%;">
                     <h3 class="mb-4 text-center">Submit Capstone <i class="fas fa-solid fa-star"></i></h3>
@@ -287,13 +261,6 @@ include('../functions/type.php');
     </div>
 </div>
 
-       
-
-
-
-
-
- 
 
 </body>
 <script>
@@ -342,9 +309,21 @@ function openViewModal(title, author, date_published, abstract, event) {
 
 
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+<style>
 
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transform: translateY(-5px);
+        transition: all 0.4s ease;
+    }
+    .card{
+        border-radius: 20px;
+    }
+    .btn{
+        border-radius:10px;
+    }
+    .col-sm-3{
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+</style>
 </html>
