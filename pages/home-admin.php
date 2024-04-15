@@ -114,6 +114,8 @@ include('../functions/type.php');
                     </form>
                 </div>
             </div>
+
+            
             <div class="col-sm-8" style="overflow-y:auto; height: 100%;">
     <div class="scrollable-right">
         <div class="sticky-top"  style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">

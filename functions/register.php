@@ -6,7 +6,7 @@ if(isset($_POST['submit']) && isset($_POST['action']) && $_POST['action'] === 'a
     $studentId = $_POST['studentId'];
     $accountType = $_POST['accountType'];
     $email = $_POST['email'];
-    $password =  $_POST['password'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     $sql = "INSERT INTO tbl_register (name, studentId, accountType, email, password) VALUES (:name, :studentId, :accountType, :email ,:password)";
 
@@ -19,7 +19,7 @@ if(isset($_POST['submit']) && isset($_POST['action']) && $_POST['action'] === 'a
 
     try {
         $stmt->execute();
-        header("Location:../pages/registerPage.php");
+        header("Location:../pages/loginPage.php");
         exit;
     } catch(PDOException $e) {
         echo "Error: " . $e->getMessage();
