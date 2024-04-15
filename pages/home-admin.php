@@ -14,79 +14,59 @@ include('../functions/type.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 <body>
        <!-- Dark Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-        <a class="navbar-brand" href="#">Capstone Management</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDark" aria-controls="navbarNavDark" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-      
-    </div>
-</nav>
+
 
 
     <!-- sidebar  -->
 
 
 <div class="wrapper">
-        <aside id="sidebar">
-            <div class="d-flex">
-                <button class="toggle-btn" type="button">
-                    <i class="lni lni-grid-alt"></i>
-                </button>
-                <div class="sidebar-logo">
-                    <a href="#">Menu</a>
-                </div>
-            </div>
-            <ul class="sidebar-nav">
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-home"></i>
-                        <span>Profile</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-menu"></i>
-                        <span>category</span>
-                    </a>
-                </li>
-              
-             
-               
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-cog"></i>
-                        <span>Setting</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="sidebar-footer">
-                <a href="#" class="sidebar-link">
-                    <i class="lni lni-exit"></i>
-                    <span>Logout</span>
-                </a>
-            </div>
-        </aside>
-        <div class="container-fluid">
+<aside id="sidebar" class="bg-dark">
+    <div class="d-flex">
+        <button class="toggle-btn" type="button">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="sidebar-logo">
+            <a href="#">Menu</a>
+        </div>
+    </div>
+    <ul class="sidebar-nav">
+        <li class="sidebar-item">
+            <a href="../pages/home-admin.php" class="sidebar-link">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="#" class="sidebar-link">
+                <i class="bi bi-person-circle"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+    </ul>
+    <div class="sidebar-footer mt-auto"> <!-- Added mt-auto to push the footer to the bottom -->
+        <a href="#" class="sidebar-link">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</aside>
+
+        <div class="container-fluid" style="overflow:hidden; height: 100%;">
+       
         <div class="row" style="height:100vh;">
        
-    
-
 
 
         <div class="col-sm-3 bg-secondary text-light">
-                <div class="middle" style="overflow:hidden; height: 100%;">
-                    <h3 class="mb-4 text-center">Submit Capstone <i class="fas fa-solid fa-star"></i></h3>
+                <div class="middle mt-3" style="overflow:hidden; height: 100%;">
                     <form method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="action" value="add">
                         <input type="hidden" name="edit_id" id="edit_id" value="">
@@ -110,13 +90,19 @@ include('../functions/type.php');
                             <label for="pdf_file">PDF File:</label>
                             <input type="file" class="form-control bg-secondary border-0 text-light" id="pdf_file" name="pdf_file" accept=".pdf" required>
                         </div>
-                        <button type="submit" class="btn btn-dark" name="submit" style="float:right;">Add Capstone</button>
+                        <button type="submit" class="btn btn-dark m-1" name="submit" style="float:right;">Add Capstone</button>
                     </form>
                 </div>
             </div>
-            <div class="col-sm-8" style="overflow-y:auto; height: 100%;">
+            <div class="col-sm-9" style="overflow-y:auto; height: 100%;">
+            
     <div class="scrollable-right">
         <div class="sticky-top"  style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <div class="row bg-dark">
+          
+          <div class="h3 text-light text-center p-1">Capstone Manager</div>
+      
+            </div>
             <form method="post"> 
                 <div class="row bg-light">
                     <div class="col-sm-12 text-center">
@@ -132,7 +118,7 @@ include('../functions/type.php');
                 </div>
 
                 <!-- Date filter -->
-                <div class="row bg-light">
+                <div class="row bg-light pb-3">
                     <div class="col-sm-6">
                         <div class="form-group d-flex">
                             <label class="mr-2">From</label>
@@ -143,7 +129,7 @@ include('../functions/type.php');
                         <div class="form-group d-flex">
                             <label class="mr-2">To</label>
                             <input type="date" name="to_date" class="form-control" value="<?php echo (isset($todate))? $todate: null;?>">
-                            <div class="form-group ml-3">
+                            <div class="form-group">
                                 <button type="submit" class="btn btn-dark">Apply</button>
                             </div>
                         </div>
@@ -188,9 +174,9 @@ include('../functions/type.php');
                                     <?php endif; ?>
                                     <div class="mt-3 d-flex justify-content-end">
                                         <!-- Edit button -->
-                                        <button type="button" class="btn btn-dark edit-btn mr-2" onclick="openEditModal('<?php echo $capstone['id']; ?>', '<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>')">Edit</button>
+                                        <button type="button" class="btn btn-dark edit-btn m-1" onclick="openEditModal('<?php echo $capstone['id']; ?>', '<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>')">Edit</button>
                                         <!-- Delete button -->
-                                        <a href="?delete=<?php echo $capstone['id']; ?>" class="btn btn-dark" onclick="propa(event);">Delete</a>
+                                        <a href="?delete=<?php echo $capstone['id']; ?>" class="btn btn-dark m-1" onclick="propa(event);">Delete</a>
                                     </div>
                                 </div>
                             </div>
