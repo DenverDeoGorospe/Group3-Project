@@ -6,7 +6,7 @@ if(isset($_POST['submit']) && isset($_POST['action']) && $_POST['action'] === 'a
     $studentId = $_POST['studentId'];
     $accountType = $_POST['accountType'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
     $sql = "INSERT INTO tbl_register (name, studentId, accountType, email, password) VALUES (:name, :studentId, :accountType, :email ,:password)";
 
