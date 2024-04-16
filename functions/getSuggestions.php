@@ -9,12 +9,7 @@ if (isset($_GET['input']) && !empty($_GET['input'])) {
     $stmt->execute();
     $suggestions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($suggestions) {
-        echo json_encode($suggestions);
-    } else {
-        echo json_encode([]);
-    }
-} else {
-    echo json_encode([]);
+    echo json_encode($suggestions); // No need for additional check
+
 }
 ?>

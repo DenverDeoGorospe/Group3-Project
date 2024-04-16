@@ -82,7 +82,7 @@ ul {
 }
 
 a.sidebar-link {
-  padding: 0.625rem 1.625rem;
+  padding: 0.625rem 1.3rem;
   color: #fff;
   display: block;
   font-size: 0.9rem;
@@ -91,7 +91,7 @@ a.sidebar-link {
 }
 
 .sidebar-link i {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   margin-right: 0.75rem;
 }
 
@@ -140,13 +140,9 @@ a.sidebar-link:hover {
   transform: translateY(-5px);
   transition: all 0.4s ease;
 }
-.card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transform: translateY(-5px);
-  transition: all 0.4s ease;
-}
 .card {
   border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 .btn {
   border-radius: 10px;

@@ -33,6 +33,7 @@ if(isset($_REQUEST["logout"])){
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="../pages/style.css">
+</head>
 <body>
 
 <div class="wrapper">
@@ -47,17 +48,19 @@ if(isset($_REQUEST["logout"])){
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-item">
-            <a href="../pages/home-admin.php" class="sidebar-link">
+            <a href="../pages/home-user.php" class="sidebar-link">
                 <i class="bi bi-house-door-fill"></i>
                 <span>Home</span>
             </a>
         </li>
+       
         <li class="sidebar-item">
             <a href="#" class="sidebar-link">
                 <i class="bi bi-person-circle"></i>
                 <span>Profile</span>
             </a>
         </li>
+        
     </ul>
     <div class="sidebar-footer mt-auto"> <!-- Added mt-auto to push the footer to the bottom -->
         <a href="home-admin.php?logout=<?php echo $_SESSION["id"]; ?>" class="sidebar-link">
@@ -278,7 +281,7 @@ if(isset($_REQUEST["logout"])){
         </div>
     </div>
 </div>
-
+            </div>
        
 
 

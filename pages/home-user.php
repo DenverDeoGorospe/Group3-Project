@@ -3,65 +3,65 @@ include ('../functions/connection/dbconn.php');
 include ('../functions/getSuggestions.php');
 include ('../functions/type.php');
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-
-    <link rel="stylesheet" href="../assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        crossorigin="anonymous"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../pages/style.css">
 
 </head>
-
 <body>
+
+<div class="wrapper">
+<aside id="sidebar" class="bg-dark">
+    <div class="d-flex">
+        <button class="toggle-btn" type="button">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="sidebar-logo">
+            <a href="#">Menu</a>
+        </div>
+    </div>
+    <ul class="sidebar-nav">
+        <li class="sidebar-item">
+            <a href="../pages/home-user.php" class="sidebar-link">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Home</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="../pages/home-user.php" class="sidebar-link">
+            <i class="bi bi-bookmark-heart-fill"></i>
+                <span>Favorites</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a href="#" class="sidebar-link">
+                <i class="bi bi-person-circle"></i>
+                <span>Profile</span>
+            </a>
+        </li>
+        
+    </ul>
+    <div class="sidebar-footer mt-auto"> <!-- Added mt-auto to push the footer to the bottom -->
+        <a href="home-admin.php?logout=<?php echo $_SESSION["id"]; ?>" class="sidebar-link">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+        </a>
+    </div>
+</aside>
     <div class="container-fluid">
         <div class="row" style="height:100vh;">
-            <div class="col-sm-1 bg-dark">
-                <div class="left d-flex flex-column justify-content-between align-items-center"
-                    style="overflow:hidden; height: 100%;">
-                    <ul class="nav nav-pills flex-column mt-3 text-center">
-                        <li class="nav-item m-auto pt-3">
-                            <a href="home-user.php" class="nav-link" title="" data-bs-toggle="tooltip"
-                                data-bs-placement="right" data-bs-original-title="Home">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-house-fill h3 text-light"></i>
-                                    <label class="text-light ml-2">Home</label>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="nav-item m-auto pt-3">
-                            <a href="profile-user.php" class="nav-link" title="" data-bs-toggle="tooltip" data-bs-placement="right">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-person-circle h3 text-light"></i>
-                                    <label class="text-light ml-2">Profile</label>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul class="nav nav-pills mt-auto text-center">
-                        <li class="nav-item m-auto pt-3">
-                            <a href="#" class="nav-link" title="" data-bs-toggle="tooltip" data-bs-placement="right">
-                                <div class="d-flex align-items-center">
-                                    <i class="bi bi-box-arrow-left h3 text-light"></i>
-                                    <label class="text-light ml-2">Logout</label>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
 
-            <div class="col-lg-11" style="overflow-y:auto; height: 100%;">
+            <div class="col-sm-12" style="overflow-y:auto; height: 100%;">
                 <div class="scrollable-right">
                     <div class="sticky-top" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
                         <form method="post">
@@ -85,7 +85,7 @@ include ('../functions/type.php');
                                 </div>
 
                             </div>
-                            <div class="row bg-light">
+                            <div class="row bg-light pb-3">
                                 <div class="col-sm-6">
                                     <div class="form-group d-flex">
                                         <label class="mr-2">From</label>
@@ -104,6 +104,7 @@ include ('../functions/type.php');
                                     </div>
                                 </div>
                             </div>
+                            </div>
                             <div class="row mt-3">
                                 <?php if (count($capstones) == 0): ?>
                                     <div class="col-12 text-center">
@@ -117,8 +118,8 @@ include ('../functions/type.php');
                                         foreach ($searchCapstone as $capstone):
                                             $pdf_file = $capstone['pdf_file'];
                                             ?>
-                                            <div class="col-sm-4 mb-4">
-                                                <div class="card bg-light h-100"
+                                            <div class="col-sm-4 mb-2">
+                                                <div class="card bg-light"
                                                     onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>',event)">
                                                     <!-- Added h-100 class to ensure all cards have the same height -->
                                                     <div class="card-body d-flex flex-column">
@@ -156,10 +157,11 @@ include ('../functions/type.php');
                                     ?>
                                 <?php endif; ?>
                             </div>
-                    </div>
+                  
                 </div>
             </div>
         </div>
+     </div>
         <!-- View Modal -->
         <div class="modal fade" id="viewModal">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -191,7 +193,7 @@ include ('../functions/type.php');
             </div>
         </div>
 
-
+                                </div>
 </body>
 <script>
 
@@ -255,7 +257,16 @@ include ('../functions/type.php');
             }
         });
     }
+    const hamBurger = document.querySelector(".toggle-btn");
+
+hamBurger.addEventListener("click", function () {
+  document.querySelector("#sidebar").classList.toggle("expand");
+});
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
 <style>
     .card:hover {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
