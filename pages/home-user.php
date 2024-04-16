@@ -251,11 +251,6 @@ include ('../functions/type.php');
             }
         });
     }
-
-
-
-
-
 </script>
 <style>
     .card:hover {
