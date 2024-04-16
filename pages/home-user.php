@@ -4,6 +4,21 @@ include ('../functions/getSuggestions.php');
 include ('../functions/type.php');
 ?>
 
+<?php
+session_start();
+
+if(!isset($_SESSION["id"])){
+	header("location: ../pages/loginPage.php"); 
+	exit();
+}
+
+if(isset($_REQUEST["logout"])){
+	session_destroy();
+	header("location: ../pages/loginPage.php");
+	exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +67,7 @@ include ('../functions/type.php');
         
     </ul>
     <div class="sidebar-footer mt-auto"> <!-- Added mt-auto to push the footer to the bottom -->
-        <a href="home-admin.php?logout=<?php echo $_SESSION["id"]; ?>" class="sidebar-link">
+        <a href="home-user.php?logout=<?php echo $_SESSION["id"]; ?>" class="sidebar-link">
             <i class="bi bi-box-arrow-left"></i>
             <span>Logout</span>
         </a>
