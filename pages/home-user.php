@@ -9,7 +9,7 @@ include ('../functions/type.php');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+
     <link rel="stylesheet" href="../assets/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -40,7 +40,7 @@ include ('../functions/type.php');
                             </a>
                         </li>
                         <li class="nav-item m-auto pt-3">
-                            <a href="#" class="nav-link" title="" data-bs-toggle="tooltip" data-bs-placement="right">
+                            <a href="profile-user.php" class="nav-link" title="" data-bs-toggle="tooltip" data-bs-placement="right">
                                 <div class="d-flex align-items-center">
                                     <i class="bi bi-person-circle h3 text-light"></i>
                                     <label class="text-light ml-2">Profile</label>
