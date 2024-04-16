@@ -6,7 +6,6 @@ include ('../functions/type.php');
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +22,6 @@ include ('../functions/type.php');
 </head>
 
 <body>
-
     <div class="container-fluid">
         <div class="row" style="height:100vh;">
             <div class="col-sm-1 bg-dark">
