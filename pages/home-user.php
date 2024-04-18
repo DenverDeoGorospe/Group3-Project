@@ -2,15 +2,18 @@
 include ('../functions/connection/dbconn.php');
 include ('../functions/getSuggestions.php');
 include ('../functions/type.php');
+include ('../functions/fave-add.php');
 ?>
 
 <?php
 session_start();
 
 if(!isset($_SESSION["id"])){
+    
 	header("location: ../pages/loginPage.php"); 
 	exit();
 }
+
 
 if(isset($_REQUEST["logout"])){
 	session_destroy();
@@ -53,7 +56,7 @@ if(isset($_REQUEST["logout"])){
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="../pages/home-user.php" class="sidebar-link">
+            <a href="../pages/favorite.php" class="sidebar-link">
             <i class="bi bi-bookmark-heart-fill"></i>
                 <span>Favorites</span>
             </a>
@@ -139,7 +142,10 @@ if(isset($_REQUEST["logout"])){
                                                     <!-- Added h-100 class to ensure all cards have the same height -->
                                                     <div class="card-body d-flex flex-column">
                                                         <!-- Added flex-column class to align content vertically -->
-                                                        <label for="title" class="font-weight-bold">Title</label>
+                                                        <h1></h1>
+                                                        <label for="title" class="font-weight-bold">Title
+                                                        <a href="?favorite=<?php echo $capstone['id']; ?>" style="float: right;" class="btn btn-danger"><i class="bi bi-box-arrow-left"></i></a>
+                                                        </label>
                                                         <h5 class="card-title text-truncate"><?php echo $capstone['title']; ?></h5>
                                                         <label for="author" class="font-weight-bold">Author</label>
                                                         <h6 class="card-subtitle mb-2 text-muted"><?php echo $capstone['author']; ?>
@@ -149,8 +155,11 @@ if(isset($_REQUEST["logout"])){
                                                         <label for="abstract" class="font-weight-bold">Abstract</label>
                                                         <p class="card-text text-truncate"><?php echo $capstone['abstract']; ?></p>
                                                         <?php if (!empty($pdf_file)): ?>
+                                                            <div class="alert flex-grow-1 ps-0" role="alert">
                                                             <a href="<?php echo $pdf_file; ?>" download class="mt-auto">Download PDF</a>
                                                             <!-- Added mt-auto class to push the link to the bottom -->
+                                                            </div>
+                                                            
                                                         <?php else: ?>
                                                             <div class="alert alert-warning flex-grow-1" role="alert">
                                                                 <!-- Added flex-grow-1 class to make the alert occupy the remaining space -->

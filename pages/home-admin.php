@@ -176,6 +176,7 @@ if(isset($_REQUEST["logout"])){
                                     <p class="card-text"><?php echo $capstone['date_published']; ?></p>
                                     <label for="abstract" class="font-weight-bold">Abstract</label>
                                     <p class="card-text text-truncate"><?php echo $capstone['abstract']; ?></p>
+                                    
                                     <?php if (!empty($pdf_file)): ?>
                                         <a href="<?php echo $pdf_file; ?>" download class="mt-auto">Download PDF</a> <!-- Added mt-auto class to push the link to the bottom -->
                                     <?php else: ?>
@@ -239,6 +240,8 @@ if(isset($_REQUEST["logout"])){
                         <label for="abstract_modal">Abstract:</label>
                         <textarea class="form-control" id="abstract_modal" name="abstract" rows="4" required><?php echo isset($capstone['abstract']) ? $capstone['abstract'] : ''; ?></textarea>
                     </div>
+                    
+
                 </div>
                                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
