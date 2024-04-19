@@ -1,7 +1,7 @@
 <?php
 include ('../functions/connection/dbconn.php');
 include ('../functions/getSuggestions.php');
-include ('../functions/type.php');
+include ('../functions/fave-get.php');
 ?>
 
 <?php
@@ -13,7 +13,7 @@ if(!isset($_SESSION["id"])){
 }
 
 if(isset($_REQUEST["logout"])){
-	session_destroy();
+	session_destroy(); 
 	header("location: ../pages/loginPage.php");
 	exit();
 }
@@ -121,7 +121,7 @@ if(isset($_REQUEST["logout"])){
                             </div>
                             </div>
                             <div class="row mt-3">
-                                <?php if (count($capstones) == 0): ?>
+                                <?php if (count($favorite) == 0): ?>
                                     <div class="col-12 text-center">
                                         <div class="h5">
                                             No record found
@@ -129,8 +129,8 @@ if(isset($_REQUEST["logout"])){
                                     </div>
                                 <?php else: ?>
                                     <?php
-                                    if (!empty($searchCapstone)) {
-                                        foreach ($searchCapstone as $capstone):
+                                    if (!empty($favorite)) {
+                                        foreach ($favorite as $capstone):
                                             $pdf_file = $capstone['pdf_file'];
                                             ?>
                                             <div class="col-sm-4 mb-2">
