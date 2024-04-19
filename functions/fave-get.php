@@ -1,7 +1,5 @@
 <?php
 include('../functions/connection/dbconn.php');
-session_start();
-$accounttype = $_SESSION['id'];
 // Fetch all capstones from the database
 $stmt = $conn->prepare("SELECT c.title as title,c.author as author,c.date_published as date_published,c.abstract as abstract,
 c.pdf_file as pdf_file FROM tbl_favorite as f
