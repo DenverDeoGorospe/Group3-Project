@@ -85,7 +85,7 @@ if(isset($_REQUEST["logout"])){
                                     <div style="display: inline-block; width:75%;">
                                         <div class="input-group m-3">
                                             <input type="text" class="form-control rounded-pill" id="capSearch"
-                                                placeholder="Search" name="forSearch"
+                                                placeholder="Search" name="forSearchFave"
                                                 value="<?php echo (isset($searchVal)) ? $searchVal : null; ?>"
                                                 oninput="getSuggestions(this.value)">
                                             <button type="submit" name="capSearch" value="SEARCH"
@@ -100,25 +100,7 @@ if(isset($_REQUEST["logout"])){
                                 </div>
 
                             </div>
-                            <div class="row bg-light pb-3">
-                                <div class="col-sm-6">
-                                    <div class="form-group d-flex">
-                                        <label class="mr-2">From</label>
-                                        <input type="date" name="from_date" class="form-control"
-                                            value="<?php echo (isset($fromdate)) ? $fromdate : null; ?>">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group d-flex">
-                                        <label class="mr-2">To</label>
-                                        <input type="date" name="to_date" class="form-control"
-                                            value="<?php echo (isset($todate)) ? $todate : null; ?>">
-                                        <div class="form-group ml-3">
-                                            <button type="submit" class="btn btn-dark">Apply</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                             </div>
                             <div class="row mt-3">
                                 <?php if (count($favorite) == 0): ?>
