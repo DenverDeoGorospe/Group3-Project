@@ -46,6 +46,14 @@ include('delete-admin.php');
                 </form>
             </div>
             <div class="col-sm-8" style="overflow-y:auto;">Browse here <!-- EDIT VIEW PART -->
+
+            <div class="search-container">
+    <form action="search_view.php" method="post">
+        <input type="text" class="search-box" name="query" placeholder="Enter your search title">
+        <button type="submit" class="search-button">Search</button>
+    </form>
+</div>
+
                 <div class="row mt-5">
                     <?php foreach($capstones as $capstone): ?>
                         <div class="col-md-4 mb-4">
