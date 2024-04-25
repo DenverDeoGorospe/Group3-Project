@@ -155,7 +155,7 @@ if(isset($_REQUEST["logout"])){
                             $pdf_file = $capstone['pdf_file'];?>
                             
                             <div class="col-sm-4 mb-4">
-                                <div class="card bg-light h-100" onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>',event)"> <!-- Added h-100 class to ensure all cards have the same height -->
+                                <div class="card bg-light h-100" onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>')"> <!-- Added h-100 class to ensure all cards have the same height -->
                                     <div class="card-body d-flex flex-column"> <!-- Added flex-column class to align content vertically -->
                                         <label for="title" class="font-weight-bold">Title</label>
                                         <h5 class="card-title text-truncate"><?php echo $capstone['title']; ?></h5>
@@ -222,7 +222,7 @@ if(isset($_REQUEST["logout"])){
     
 <!-- Modal for Editing -->
 <div class="modal fade" id="editModal">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Edit Capstone</h5>
@@ -262,7 +262,7 @@ if(isset($_REQUEST["logout"])){
 
 <!-- View Modal -->
 <div class="modal fade" id="viewModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">View Capstone</h5>
@@ -322,7 +322,8 @@ if(isset($_REQUEST["logout"])){
 
 
 
-function openViewModal(title, author, date_published, abstract, event) {
+function openViewModal(title, author, date_published, abstract) {
+    propa(event);
     var viewModal = document.getElementById('viewModal');
     var viewTitle = viewModal.querySelector('#view_title');
     var viewAuthor = viewModal.querySelector('#view_author');
