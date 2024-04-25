@@ -1,6 +1,7 @@
 <?php
 include('../functions/connection/dbconn.php');
 include('../functions/fave-get.php');
+include('../functions/fave-delete.php');
 ?>
 
 <?php
@@ -123,7 +124,7 @@ if(isset($_REQUEST["logout"])){
                     ?>
                         <div class="col-sm-4 mb-4">
                             <div class="card bg-light h-100" onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>',event)"> 
-                            <a href="../functions/delete_favorite.php?capstone_id=<?php echo $capstone['id']; ?>&id=<?php echo $_SESSION['id']; ?>" class="btn btn-none fs-5 text-right position-absolute top-0 end-0 p-3 favorite-icon" onclick="propa(event)"><i class="bi bi-heart-fill text-danger"></i></a>
+                            <a href="?delete=<?php echo $capstone['id']; ?>" class="btn btn-none fs-5 text-right position-absolute top-0 end-0 p-3 favorite-icon" onclick="propa(event)"><i class="bi bi-heart-fill text-danger"></i></a>
                                 <div class="card-body d-flex flex-column"> <!-- Added flex-column class to align content vertically -->
                                     <label for="title" class="font-weight-bold">Title</label>
                                     <h5 class="card-title text-truncate"><?php echo $capstone['title']; ?></h5>
