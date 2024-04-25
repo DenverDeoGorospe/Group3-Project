@@ -21,4 +21,13 @@ WHERE date_published BETWEEN '$fromdate' AND '$todate' AND is_status = '1'");
 }
 $stmt->execute();
 $searchCapstone = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//pagination logic
+$recordsPerPage = 15;
+$totalRecords = count($searchCapstone);
+$totalPages = ceil($totalRecords / $recordsPerPage);
+$page = isset($_GET['page']) && $_GET['page'] <= $totalPages ? $_GET['page'] : 1;
+$offset = ($page - 1) * $recordsPerPage;
+$searchCapstone = array_slice($searchCapstone, $offset, $recordsPerPage);
+
 ?>

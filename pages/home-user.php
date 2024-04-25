@@ -181,8 +181,34 @@ if(isset($_REQUEST["logout"])){
                                     ?>
                                 <?php endif; ?>
                             </div>
-                  
                 </div>
+
+                <div class="pagination-container d-flex justify-content-center">
+            <nav aria-label="navigation">
+    <ul class="pagination">
+        <?php
+        // Previous page link
+        $prevPage = $page - 1;
+        if ($prevPage > 0) {
+            echo "<li class='page-item'><a class='page-link text-dark bg-light' href='?page=$prevPage' aria-label='<<'><span aria-hidden='true'>&laquo;</span><span class='sr-only'></span></a></li>";
+        }
+
+        // Pagination links
+        for ($i = 1; $i <= $totalPages; $i++) {
+            echo "<li class='page-item ".($page==$i?'active':'')."'><a class='page-link ".($page==$i?'text-light bg-dark outline-none':'bg-light text-dark')."' href='?page=$i'>$i</a></li>";
+        }
+
+        // Next page link
+        $nextPage = $page + 1;
+        if ($nextPage <= $totalPages) {
+            echo "<li class='page-item'><a class='page-link text-dark bg-light' href='?page=$nextPage' aria-label='>>'><span aria-hidden='true'>&raquo;</span><span class='sr-only'></span></a></li>";
+        }
+        ?>
+    </ul>
+</nav>
+                    </div>
+
+
             </div>
         </div>
      </div>
