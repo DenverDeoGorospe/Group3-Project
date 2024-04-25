@@ -57,7 +57,7 @@ if(isset($_REQUEST["logout"])){
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-item">
-            <a href="../pages/home-admin.php" class="sidebar-link">
+            <a href="../pages/home-user.php" class="sidebar-link">
                 <i class="bi bi-house-door-fill"></i>
                 <span>Home</span>
             </a>
