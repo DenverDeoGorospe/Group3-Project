@@ -343,7 +343,6 @@ input.form-control {
   border: none;
   border-bottom: black solid 2px; 
   background: none; 
-  border-radius: none;
 }
 
 
