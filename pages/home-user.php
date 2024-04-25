@@ -74,13 +74,15 @@ if(isset($_REQUEST["logout"])){
     </div>
 </aside>
     <div class="container-fluid">
+        
         <div class="row" style="height:100vh;">
+        
 
             <div class="col-sm-12" style="overflow-y:auto; height: 100%;">
                 <div class="scrollable-right">
                     <div class="sticky-top" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
                         <form method="post">
-                            <div class="row bg-light">
+                            <div class="row bg-dark">
                                 <div class="col-sm-12 text-center">
                                     <div style="display: inline-block; width:75%;">
                                         <div class="input-group m-3">
@@ -100,7 +102,7 @@ if(isset($_REQUEST["logout"])){
                                 </div>
 
                             </div>
-                            <div class="row bg-light pb-3">
+                            <div class="row bg-dark pb-3">
                                 <div class="col-sm-6">
                                     <div class="form-group d-flex">
                                         <label class="mr-2">From</label>
@@ -134,7 +136,7 @@ if(isset($_REQUEST["logout"])){
                                             $pdf_file = $capstone['pdf_file'];
                                             ?>
                                             <div class="col-sm-4 mb-2">
-                                                <div class="card bg-light"
+                                                <div class="card bg-light h-100"
                                                     onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>',event)">
                                                     <!-- Added h-100 class to ensure all cards have the same height -->
                                                     <div class="card-body d-flex flex-column">
