@@ -11,4 +11,13 @@ INNER JOIN tbl_register as r ON r.id = f.userID
 AND (c.title LIKE '%$searchVal%')");
 $stmt->execute();
 $favorite = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+
+//pagination logic
+$recordsPerPage = 15;
+$totalRecords = count($favorite);
+$totalPages = ceil($totalRecords / $recordsPerPage);
+$page = isset($_GET['page']) && $_GET['page'] <= $totalPages ? $_GET['page'] : 1;
+$offset = ($page - 1) * $recordsPerPage;
+$favorite = array_slice($favorite, $offset, $recordsPerPage);
 ?>
