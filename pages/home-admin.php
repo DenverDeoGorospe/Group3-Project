@@ -15,6 +15,12 @@ if(!isset($_SESSION["id"])){
 	exit();
 }
 
+if($_SESSION['accountType'] != 'admin'){
+    session_destroy();
+    header("location: ../pages/loginPage.php");
+    exit();
+}
+
 if(isset($_REQUEST["logout"])){
 	session_destroy();
 	header("location: ../pages/loginPage.php");
