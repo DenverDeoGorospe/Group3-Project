@@ -32,7 +32,7 @@ if(isset($_REQUEST["logout"])){
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../pages/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -70,147 +70,146 @@ if(isset($_REQUEST["logout"])){
     </div>
 </aside>
 
-        <div class="container-fluid" style="overflow:hidden; height: 100%;">
-       
-        <div class="row" style="height:100vh;">
-       
-
-
+<div class="container-fluid" style="overflow:hidden; height: 100%;">
+    <div class="row" style="height:100vh;">
         <div class="col-sm-3 bg-secondary text-light">
-                <div class="middle mt-3" style="overflow:hidden; height: 100%;">
-                    <form method="POST" enctype="multipart/form-data">
+            <div class="middle mt-3" style="overflow:hidden; height: 100%;">
+            <form method="POST" enctype="multipart/form-data">
                         <input type="hidden" name="action" value="add">
                         <input type="hidden" name="edit_id" id="edit_id" value="">
                         <div class="form-group">
                             <label for="title">Title:</label>
-                            <input type="text" class="form-control" id="title" name="title" required>
+                            <input type="text" class="form-control shadow-none text-white" id="title" name="title" required>
                         </div>
                         <div class="form-group">
                             <label for="author">Author:</label>
-                            <input type="text" class="form-control" id="author" name="author" required>
+                            <input type="text" class="form-control shadow-none text-white" id="author" name="author" required>
                         </div>
                         <div class="form-group">
                             <label for="date_pub">Date Published:</label>
-                            <input type="date" class="form-control" id="date_pub" name="date_pub" required>
+                            <input type="date" class="form-control shadow-none text-white" id="date_pub" name="date_pub" required>
                         </div>
                         <div class="form-group">
                             <label for="abstract">Abstract:</label>
-                            <textarea class="form-control" id="abstract" name="abstract" rows="4" required></textarea>
+                            <textarea class="form-control shadow-none" id="abstract" name="abstract" rows="4" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="pdf_file">PDF File:</label>
-                            <input type="file" class="form-control bg-secondary border-0 text-light" id="pdf_file" name="pdf_file" accept=".pdf" required>
+                            <input type="file" class="form-control shadow-none text-white bg-secondary border-0 text-light" id="pdf_file" name="pdf_file" accept=".pdf" required>
                         </div>
                         <button type="submit" class="btn btn-dark m-1" name="submit" style="float:right;">Add Capstone</button>
                     </form>
-                </div>
             </div>
-            <div class="col-sm-9" style="overflow-y:auto; height: 100%;">
-            
-    <div class="scrollable-right">
-        <div class="sticky-top"  style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-        <div class="row bg-dark">
-          
-          <div class="h3 text-light text-center p-1">Capstone Manager</div>
-      
-            </div>
-            <form method="post"> 
-                <div class="row bg-light">
-                    <div class="col-sm-12 text-center">
-                        <div style="display: inline-block; width:75%;">
-                            <div class="input-group m-3">
-                                <input type="text" class="form-control rounded-pill" id="capSearch" placeholder="Search" name="forSearch" value="<?php echo (isset($searchVal))? $searchVal: null;?>">
-                                <button type="submit" name="capSearch" value="SEARCH" class="btn btn-primary rounded-pill text-light bg-dark border-none" style="border:none;">
-                                    <i class="bi bi-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Date filter -->
-                <div class="row bg-light pb-3">
-                    <div class="col-sm-6">
-                        <div class="form-group d-flex">
-                            <label class="mr-2">From</label>
-                            <input type="date" name="from_date" class="form-control" value="<?php echo (isset($fromdate))? $fromdate: null;?>">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group d-flex">
-                            <label class="mr-2">To</label>
-                            <input type="date" name="to_date" class="form-control" value="<?php echo (isset($todate))? $todate: null;?>">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-dark">Apply</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
         </div>
-
-        <div class="row mt-3">
-            <?php if (count($capstones) == 0): ?>
-                <div class="col-12 text-center">
-                    <div class="h5">
-                        No record found
+        <div class="col-sm-9" style="overflow-y:auto; height: 100%;">
+            <div class="scrollable-right">
+                <!-- Capstone Manager -->
+                <div class="sticky-top"  style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+                    <div class="row bg-dark">  
+                        <div class="h3 text-light text-center p-1">Capstone Manager</div>  
                     </div>
-                </div>
-            <?php else: ?>
-                <?php
-                if(!empty($searchCapstone)) {
-                
-
-
-                  foreach($searchCapstone as $capstone): 
-                        $pdf_file = $capstone['pdf_file'];
-                    ?>
-                        <div class="col-sm-4 mb-4">
-                            <div class="card bg-light h-100" onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>',event)"> <!-- Added h-100 class to ensure all cards have the same height -->
-                                <div class="card-body d-flex flex-column"> <!-- Added flex-column class to align content vertically -->
-                                    <label for="title" class="font-weight-bold">Title</label>
-                                    <h5 class="card-title text-truncate"><?php echo $capstone['title']; ?></h5>
-                                    <label for="author" class="font-weight-bold">Author</label>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $capstone['author']; ?></h6>
-                                    <label for="date published" class="font-weight-bold">Date published</label>
-                                    <p class="card-text"><?php echo $capstone['date_published']; ?></p>
-                                    <label for="abstract" class="font-weight-bold">Abstract</label>
-                                    <p class="card-text text-truncate"><?php echo $capstone['abstract']; ?></p>
-                                    <?php if (!empty($pdf_file)): ?>
-                                        <a href="<?php echo $pdf_file; ?>" download class="mt-auto">Download PDF</a> <!-- Added mt-auto class to push the link to the bottom -->
-                                    <?php else: ?>
-                                        <div class="alert alert-warning flex-grow-1" role="alert"> <!-- Added flex-grow-1 class to make the alert occupy the remaining space -->
-                                            No Available File
-                                        </div>
-                                    <?php endif; ?>
-                                    <div class="mt-3 d-flex justify-content-end">
-                                        <!-- Edit button -->
-                                        <button type="button" class="btn btn-dark edit-btn m-1" onclick="openEditModal('<?php echo $capstone['id']; ?>', '<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>')">Edit</button>
-                                        <!-- Delete button -->
-                                        <a href="?delete=<?php echo $capstone['id']; ?>" class="btn btn-dark m-1" onclick="propa(event);">Delete</a>
+                    <form method="post"> 
+                        <div class="row bg-light">
+                            <div class="col-sm-12 text-center">
+                                <div style="display: inline-block; width:75%;">
+                                    <div class="input-group m-3">
+                                        <input type="text" class="form-control shadow-none" id="capSearch" placeholder="Search" name="forSearch" value="<?php echo (isset($searchVal))? $searchVal: null;?>">
+                                        <button type="submit" name="capSearch" value="SEARCH" class="btn btn-primary rounded-pill text-light bg-dark border-none" style="border:none;">
+                                            <i class="bi bi-search"></i>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    <?php endforeach; 
-                    
-                    
+                        <!-- Date filter -->
+                        <div class="row bg-light pb-3">
+                            <div class="col-sm-6">
+                                <div class="form-group d-flex">
+                                    <label class="mr-2 p-1">From</label>
+                                    <input type="date" name="from_date" id="sort" class="form-control shadow-none" value="<?php echo (isset($fromdate))? $fromdate: null;?>">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group d-flex">
+                                    <label class="mr-2 p-1">To</label>
+                                    <input type="date" name="to_date" id="sort" class="form-control shadow-none" value="<?php echo (isset($todate))? $todate: null;?>">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-dark">Apply</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
 
-                } else {
-                    echo "<div class='col-12 text-center'>
-                            <div class='h5'>
+                <!-- Capstone Cards Section -->
+                <div class="row mt-3">
+                    <?php if (count($searchCapstone) == 0): ?>
+                        <div class="col-12 text-center">
+                            <div class="h5">
                                 No record found
                             </div>
-                        </div>";
-                }
-                ?>
-            <?php endif;?>
+                        </div>
+                    <?php else: ?>
+                        <?php foreach($searchCapstone as $capstone): ?>
+                            <div class="col-sm-4 mb-4">
+                                <div class="card bg-light h-100" onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>',event)"> <!-- Added h-100 class to ensure all cards have the same height -->
+                                    <div class="card-body d-flex flex-column"> <!-- Added flex-column class to align content vertically -->
+                                        <label for="title" class="font-weight-bold">Title</label>
+                                        <h5 class="card-title text-truncate"><?php echo $capstone['title']; ?></h5>
+                                        <label for="author" class="font-weight-bold">Author</label>
+                                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $capstone['author']; ?></h6>
+                                        <label for="date published" class="font-weight-bold">Date published</label>
+                                        <p class="card-text"><?php echo $capstone['date_published']; ?></p>
+                                        <label for="abstract" class="font-weight-bold">Abstract</label>
+                                        <p class="card-text text-truncate"><?php echo $capstone['abstract']; ?></p>
+                                        <div class="mt-3 d-flex justify-content-end">
+                                            <!-- Edit button -->
+                                            <button type="button" class="btn btn-none edit-btn" onclick="openEditModal('<?php echo $capstone['id']; ?>', '<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>')">Edit</button>
+                                            <!-- Delete button -->
+                                            <a href="?delete=<?php echo $capstone['id']; ?>" class="btn btn-none" onclick="propa(event);">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif;?>
+                </div>
+
+                <!-- Pagination Section -->
+             
+            </div>
+            <div class="pagination-container d-flex justify-content-center">
+            <nav aria-label="navigation">
+    <ul class="pagination">
+        <?php
+        // Previous page link
+        $prevPage = $page - 1;
+        if ($prevPage > 0) {
+            echo "<li class='page-item'><a class='page-link text-dark bg-light' href='?page=$prevPage' aria-label='<<'><span aria-hidden='true'>&laquo;</span><span class='sr-only'></span></a></li>";
+        }
+
+        // Pagination links
+        for ($i = 1; $i <= $totalPages; $i++) {
+            echo "<li class='page-item ".($page==$i?'active':'')."'><a class='page-link ".($page==$i?'text-light bg-dark outline-none':'bg-light text-dark')."' href='?page=$i'>$i</a></li>";
+        }
+
+        // Next page link
+        $nextPage = $page + 1;
+        if ($nextPage <= $totalPages) {
+            echo "<li class='page-item'><a class='page-link text-dark bg-light' href='?page=$nextPage' aria-label='>>'><span aria-hidden='true'>&raquo;</span><span class='sr-only'></span></a></li>";
+        }
+        ?>
+    </ul>
+</nav>
+
+                    </div>
+          
         </div>
+   
     </div>
 </div>
-
-        </div>
-    </div>
+    
 <!-- Modal for Editing -->
 <div class="modal fade" id="editModal">
     <div class="modal-dialog modal-dialog-centered">
@@ -225,19 +224,19 @@ if(isset($_REQUEST["logout"])){
                 <input type="hidden" name="edit_id" id="edit_id_modal" value="">
                     <div class="form-group">
                         <label for="title_modal">Title:</label>
-                        <input type="text" class="form-control" id="title_modal" name="title" value="<?php echo isset($capstone['title']) ? $capstone['title'] : ''; ?>" required>
+                        <input type="text" class="form-control shadow-none text-white" id="title_modal" name="title" value="<?php echo isset($capstone['title']) ? $capstone['title'] : ''; ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="author_modal">Author:</label>
-                        <input type="text" class="form-control" id="author_modal" name="author" value="<?php echo isset($capstone['author']) ? $capstone['author'] : ''; ?>" required>
+                        <input type="text" class="form-control shadow-none text-white" id="author_modal" name="author" value="<?php echo isset($capstone['author']) ? $capstone['author'] : ''; ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="date_pub_modal">Date Published:</label>
-                        <input type="date" class="form-control" id="date_pub_modal" name="date_pub" value="<?php echo isset($capstone['date_published']) ? $capstone['date_published'] : ''; ?>" required>
+                        <input type="date" class="form-control shadow-none text-white" id="date_pub_modal" name="date_pub" value="<?php echo isset($capstone['date_published']) ? $capstone['date_published'] : ''; ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="abstract_modal">Abstract:</label>
-                        <textarea class="form-control" id="abstract_modal" name="abstract" rows="4" required><?php echo isset($capstone['abstract']) ? $capstone['abstract'] : ''; ?></textarea>
+                        <textarea class="form-control shadow-none text-white" id="abstract_modal" name="abstract" rows="4" required><?php echo isset($capstone['abstract']) ? $capstone['abstract'] : ''; ?></textarea>
                     </div>
                 </div>
                                 <div class="modal-footer">
@@ -283,12 +282,6 @@ if(isset($_REQUEST["logout"])){
 </div>
             </div>
        
-
-
-
-
-
- 
 
 </body>
 <script>
@@ -344,6 +337,36 @@ hamBurger.addEventListener("click", function () {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
+<style>
+
+input.form-control {
+  border: none;
+  border-bottom: black solid 2px; 
+  background: none; 
+  border-radius: none;
+}
 
 
+input.form-control:focus {
+  border-bottom: solid 2px; 
+  outline: none;
+  background: none; 
+}
+
+#sort {
+  outline: none;
+  background: none;
+  border-radius: none;
+}
+.pagination-container {
+    position: sticky;
+    bottom: 20px;
+    margin-top: auto;
+    width:100%;
+
+}
+
+</style>
 </html>
+
+
