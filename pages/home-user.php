@@ -151,7 +151,7 @@ if(isset($_REQUEST["logout"])){
                                                         <label for="abstract" class="font-weight-bold">Abstract</label>
                                                         <p class="card-text text-truncate"><?php echo $capstone['abstract']; ?></p>
                                                         <?php if (!empty($pdf_file)): ?>
-                                                            <a href="<?php echo $pdf_file; ?>" download class="mt-auto">Download PDF</a>
+                                                            <a href="<?php echo $pdf_file; ?>" download class="mt-auto" onclick="propa(event)">Download PDF</a>
                                                             <!-- Added mt-auto class to push the link to the bottom -->
                                                         <?php else: ?>
                                                             <div class="alert alert-warning flex-grow-1" role="alert">
