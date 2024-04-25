@@ -234,19 +234,19 @@ if(isset($_REQUEST["logout"])){
                 <input type="hidden" name="edit_id" id="edit_id_modal" value="">
                     <div class="form-group">
                         <label for="title_modal">Title:</label>
-                        <input type="text" class="form-control shadow-none text-white" id="title_modal" name="title" value="<?php echo isset($capstone['title']) ? $capstone['title'] : ''; ?>" required>
+                        <input type="text" class="form-control shadow-none text-dark" id="title_modal" name="title" value="<?php echo isset($capstone['title']) ? $capstone['title'] : ''; ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="author_modal">Author:</label>
-                        <input type="text" class="form-control shadow-none text-white" id="author_modal" name="author" value="<?php echo isset($capstone['author']) ? $capstone['author'] : ''; ?>" required>
+                        <input type="text" class="form-control shadow-none text-dark" id="author_modal" name="author" value="<?php echo isset($capstone['author']) ? $capstone['author'] : ''; ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="date_pub_modal">Date Published:</label>
-                        <input type="date" class="form-control shadow-none text-white" id="date_pub_modal" name="date_pub" value="<?php echo isset($capstone['date_published']) ? $capstone['date_published'] : ''; ?>" required>
+                        <input type="date" class="form-control shadow-none text-dark" id="date_pub_modal" name="date_pub" value="<?php echo isset($capstone['date_published']) ? $capstone['date_published'] : ''; ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="abstract_modal">Abstract:</label>
-                        <textarea class="form-control shadow-none text-white" id="abstract_modal" name="abstract" rows="4" required><?php echo isset($capstone['abstract']) ? $capstone['abstract'] : ''; ?></textarea>
+                        <textarea class="form-control shadow-none text-dark" id="abstract_modal" name="abstract" rows="4" required><?php echo isset($capstone['abstract']) ? $capstone['abstract'] : ''; ?></textarea>
                     </div>
                 </div>
                                 <div class="modal-footer">
@@ -348,6 +348,11 @@ hamBurger.addEventListener("click", function () {
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
 <style>
+
+.modal-dialog {
+    max-height: calc(100vh - 100px); /* Adjust height as needed */
+    overflow-y: auto;
+}
 
 input.form-control {
   border: none;
