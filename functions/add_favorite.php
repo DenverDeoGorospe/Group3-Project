@@ -3,7 +3,6 @@ include('../functions/connection/dbconn.php');
 // Start session
 // Check if user is logged in and if capstone_id is set
 if (isset($_GET['capstone_id']) && isset($_GET['id'])) {
-    // Echo out for debugging
     // Include database connection
     include('../functions/connection/dbconn.php');
 
@@ -12,16 +11,29 @@ if (isset($_GET['capstone_id']) && isset($_GET['id'])) {
         $capstoneId = $_GET['capstone_id'];
         $userId = $_GET['id'];
 
-        // Insert into tbl_favorite
-        $stmt = $conn->prepare("INSERT INTO tbl_favorite (userID, capstoneID) VALUES (:userid, :capstoneid)");
-        $stmt->bindParam(":userid", $userId);
-        $stmt->bindParam(":capstoneid", $capstoneId);
-            
-        // Execute the statement
+        // Check if the capstone is already in the user's favorites
+        $stmt = $conn->prepare("SELECT COUNT(*) FROM tbl_favorite WHERE userID = :userId AND capstoneID = :capstoneId");
+        $stmt->bindParam(":userId", $userId);
+        $stmt->bindParam(":capstoneId", $capstoneId);
         $stmt->execute();
+        $count = $stmt->fetchColumn();
 
-        // Redirect after successful insertion
-        header("Location: ../pages/home-user.php");
+        if ($count > 0) {
+            // Capstone is already in favorites, so remove it
+            $stmt = $conn->prepare("DELETE FROM tbl_favorite WHERE userID = :userId AND capstoneID = :capstoneId");
+            $stmt->bindParam(":userId", $userId);
+            $stmt->bindParam(":capstoneId", $capstoneId);
+            $stmt->execute();
+        } else {
+            // Capstone is not in favorites, so add it
+            $stmt = $conn->prepare("INSERT INTO tbl_favorite (userID, capstoneID) VALUES (:userid, :capstoneid)");
+            $stmt->bindParam(":userid", $userId);
+            $stmt->bindParam(":capstoneid", $capstoneId);
+            $stmt->execute();
+        }
+
+        // Redirect back to the page the user was on
+        header("Location: " . $_SERVER['HTTP_REFERER']);
         exit;
     } catch(PDOException $e) {
         // Log any errors

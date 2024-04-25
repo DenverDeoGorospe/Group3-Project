@@ -6,6 +6,7 @@ include('../functions/admin/edit-admin.php');
 include('../functions/admin/delete-admin.php');
 include('../functions/type.php');
 include('../functions/add_favorite.php');
+include('../functions/heartfill.php');
 
 ?>
 
@@ -143,10 +144,21 @@ if(isset($_REQUEST["logout"])){
                   foreach($searchCapstone as $capstone): 
                         $pdf_file = $capstone['pdf_file'];
                     ?>
+                             <?php
+                                
+                                $isFavorite = isCapstoneInFavorites($capstone['id'], $_SESSION['id']); 
+                                ?>
                         <div class="col-sm-4 mb-4">
                             <div class="card bg-light h-100" onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>',event)">
-                            <a href="../functions/add_favorite.php?capstone_id=<?php echo $capstone['id']; ?>&id=<?php echo $_SESSION['id']; ?>" class="btn btn-none fs-5 text-dark text-right position-absolute top-0 end-0 p-3 favorite-icon" onclick="propa(event);"><i class="bi bi-heart"></i></a>
-
+                                <a href="../functions/add_favorite.php?capstone_id=<?php echo $capstone['id']; ?>&id=<?php echo $_SESSION['id']; ?>" class="btn btn-none fs-5 text-right position-absolute top-0 end-0 p-3 favorite-icon" onclick="propa(event);">
+                                    <?php if ($isFavorite): ?>
+                                        <!-- Solid heart icon -->
+                                        <i class="bi bi-heart-fill text-danger"></i>
+                                    <?php else: ?>
+                                        <!-- Outline heart icon -->
+                                        <i class="bi bi-heart text-dark"></i>
+                                    <?php endif; ?>
+                                </a>
 
                                 <div class="card-body d-flex flex-column"> <!-- Added flex-column class to align content vertically -->
                                     <label for="title" class="font-weight-bold">Title</label>
@@ -340,6 +352,7 @@ const hamBurger = document.querySelector(".toggle-btn");
 hamBurger.addEventListener("click", function () {
   document.querySelector("#sidebar").classList.toggle("expand");
 });
+
 
 
 
