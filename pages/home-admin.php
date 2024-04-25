@@ -151,7 +151,9 @@ if(isset($_REQUEST["logout"])){
                             </div>
                         </div>
                     <?php else: ?>
-                        <?php foreach($searchCapstone as $capstone): ?>
+                        <?php foreach($searchCapstone as $capstone): 
+                            $pdf_file = $capstone['pdf_file'];?>
+                            
                             <div class="col-sm-4 mb-4">
                                 <div class="card bg-light h-100" onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>',event)"> <!-- Added h-100 class to ensure all cards have the same height -->
                                     <div class="card-body d-flex flex-column"> <!-- Added flex-column class to align content vertically -->
@@ -163,6 +165,14 @@ if(isset($_REQUEST["logout"])){
                                         <p class="card-text"><?php echo $capstone['date_published']; ?></p>
                                         <label for="abstract" class="font-weight-bold">Abstract</label>
                                         <p class="card-text text-truncate"><?php echo $capstone['abstract']; ?></p>
+                                        
+                                    <?php if (!empty($pdf_file)): ?>
+                                        <a href="<?php echo $pdf_file; ?>" download class="mt-auto" onclick="propa(event)">Download PDF</a> <!-- Added mt-auto class to push the link to the bottom -->
+                                    <?php else: ?>
+                                        <div class="alert alert-warning flex-grow-1" role="alert"> <!-- Added flex-grow-1 class to make the alert occupy the remaining space -->
+                                            No Available File
+                                        </div>
+                                    <?php endif; ?>
                                         <div class="mt-3 d-flex justify-content-end">
                                             <!-- Edit button -->
                                             <button type="button" class="btn btn-none edit-btn" onclick="openEditModal('<?php echo $capstone['id']; ?>', '<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>')">Edit</button>
