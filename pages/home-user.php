@@ -145,7 +145,9 @@ if(isset($_REQUEST["logout"])){
                     ?>
                         <div class="col-sm-4 mb-4">
                             <div class="card bg-light h-100" onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>',event)">
-                                <a href="?capstone_id=<?php echo $capstone['id']; ?>" class="btn btn-none fs-5 text-dark text-right position-absolute top-0 end-0 p-3 favorite-icon"><i class="bi bi-heart"></i></a>
+                            <a href="../functions/add_favorite.php?capstone_id=<?php echo $capstone['id']; ?>&id=<?php echo $_SESSION['id']; ?>" class="btn btn-none fs-5 text-dark text-right position-absolute top-0 end-0 p-3 favorite-icon" onclick="propa(event);"><i class="bi bi-heart"></i></a>
+
+
                                 <div class="card-body d-flex flex-column"> <!-- Added flex-column class to align content vertically -->
                                     <label for="title" class="font-weight-bold">Title</label>
                                     <h5 class="card-title text-truncate"><?php echo $capstone['title']; ?></h5>
@@ -339,21 +341,6 @@ hamBurger.addEventListener("click", function () {
   document.querySelector("#sidebar").classList.toggle("expand");
 });
 
-   // Function to add capstone to favorites via AJAX
-   function addFavorite(capstoneId, event) {
-    event.stopPropagation(); // Prevent default link behavior
-    // AJAX request
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'add_favorite.php', true);
-    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            // Handle response if needed
-            console.log(xhr.responseText);
-        }
-    };
-    xhr.send('capstone_id=' + capstoneId);
-}
 
 
 </script>
