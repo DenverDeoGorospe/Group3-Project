@@ -12,7 +12,7 @@ if(isset($_GET['delete'])) {
 
     try {
         $stmt->execute();
-        header("Location: ../pages/.php");
+        header("Location: ../pages/favorite.php");
         exit;
     } catch(PDOException $e) {
         echo "Error: " . $e->getMessage();
