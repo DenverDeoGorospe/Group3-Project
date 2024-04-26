@@ -37,12 +37,13 @@ if(isset($_POST["btn-login"])){
 			$row = $result->fetch(PDO::FETCH_ASSOC);
 			
 			if(password_verify($password, $row["password"]) && $row["accountType"] == 'admin'){
-				
+				$_SESSION["accountType"] = $row["accountType"];
 				$_SESSION["id"] = $row["id"];
 				
 				header("Location:../pages/home-admin.php");
 				exit();
 			} else if(password_verify($password, $row["password"]) && $row["accountType"] == 'student'){
+				$_SESSION["accountType"] = $row["accountType"];
                 $_SESSION["id"] = $row["id"];
 				
 				header("Location: ../pages/home-user.php");

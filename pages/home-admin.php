@@ -15,6 +15,12 @@ if(!isset($_SESSION["id"])){
 	exit();
 }
 
+if($_SESSION['accountType'] != 'admin'){
+    session_destroy();
+    header("location: ../pages/loginPage.php");
+    exit();
+}
+
 if(isset($_REQUEST["logout"])){
 	session_destroy();
 	header("location: ../pages/loginPage.php");
@@ -151,9 +157,11 @@ if(isset($_REQUEST["logout"])){
                             </div>
                         </div>
                     <?php else: ?>
-                        <?php foreach($searchCapstone as $capstone): ?>
+                        <?php foreach($searchCapstone as $capstone): 
+                            $pdf_file = $capstone['pdf_file'];?>
+                            
                             <div class="col-sm-4 mb-4">
-                                <div class="card bg-light h-100" onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>',event)"> <!-- Added h-100 class to ensure all cards have the same height -->
+                                <div class="card bg-light h-100" onclick="openViewModal(`<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`)"> <!-- Added h-100 class to ensure all cards have the same height -->
                                     <div class="card-body d-flex flex-column"> <!-- Added flex-column class to align content vertically -->
                                         <label for="title" class="font-weight-bold">Title</label>
                                         <h5 class="card-title text-truncate"><?php echo $capstone['title']; ?></h5>
@@ -163,9 +171,17 @@ if(isset($_REQUEST["logout"])){
                                         <p class="card-text"><?php echo $capstone['date_published']; ?></p>
                                         <label for="abstract" class="font-weight-bold">Abstract</label>
                                         <p class="card-text text-truncate"><?php echo $capstone['abstract']; ?></p>
+                                        
+                                    <?php if (!empty($pdf_file)): ?>
+                                        <a href="<?php echo $pdf_file; ?>" download class="mt-auto" onclick="propa(event)">Download PDF</a> <!-- Added mt-auto class to push the link to the bottom -->
+                                    <?php else: ?>
+                                        <div class="alert alert-warning flex-grow-1" role="alert"> <!-- Added flex-grow-1 class to make the alert occupy the remaining space -->
+                                            No Available File
+                                        </div>
+                                    <?php endif; ?>
                                         <div class="mt-3 d-flex justify-content-end">
                                             <!-- Edit button -->
-                                            <button type="button" class="btn btn-none edit-btn" onclick="openEditModal('<?php echo $capstone['id']; ?>', '<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>')">Edit</button>
+                                            <button type="button" class="btn btn-none edit-btn" onclick="openEditModal('<?php echo $capstone['id']; ?>', `<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`)">Edit</button>
                                             <!-- Delete button -->
                                             <a href="?delete=<?php echo $capstone['id']; ?>" class="btn btn-none" onclick="propa(event);">Delete</a>
                                         </div>
@@ -212,7 +228,7 @@ if(isset($_REQUEST["logout"])){
     
 <!-- Modal for Editing -->
 <div class="modal fade" id="editModal">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Edit Capstone</h5>
@@ -224,19 +240,19 @@ if(isset($_REQUEST["logout"])){
                 <input type="hidden" name="edit_id" id="edit_id_modal" value="">
                     <div class="form-group">
                         <label for="title_modal">Title:</label>
-                        <input type="text" class="form-control shadow-none text-white" id="title_modal" name="title" value="<?php echo isset($capstone['title']) ? $capstone['title'] : ''; ?>" required>
+                        <input type="text" class="form-control shadow-none text-dark" id="title_modal" name="title" value="<?php echo isset($capstone['title']) ? $capstone['title'] : ''; ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="author_modal">Author:</label>
-                        <input type="text" class="form-control shadow-none text-white" id="author_modal" name="author" value="<?php echo isset($capstone['author']) ? $capstone['author'] : ''; ?>" required>
+                        <input type="text" class="form-control shadow-none text-dark" id="author_modal" name="author" value="<?php echo isset($capstone['author']) ? $capstone['author'] : ''; ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="date_pub_modal">Date Published:</label>
-                        <input type="date" class="form-control shadow-none text-white" id="date_pub_modal" name="date_pub" value="<?php echo isset($capstone['date_published']) ? $capstone['date_published'] : ''; ?>" required>
+                        <input type="date" class="form-control shadow-none text-dark" id="date_pub_modal" name="date_pub" value="<?php echo isset($capstone['date_published']) ? $capstone['date_published'] : ''; ?>" required>
                     </div>
                     <div class="form-group">
                         <label for="abstract_modal">Abstract:</label>
-                        <textarea class="form-control shadow-none text-white" id="abstract_modal" name="abstract" rows="4" required><?php echo isset($capstone['abstract']) ? $capstone['abstract'] : ''; ?></textarea>
+                        <textarea class="form-control shadow-none text-dark" id="abstract_modal" name="abstract" rows="4" required><?php echo isset($capstone['abstract']) ? $capstone['abstract'] : ''; ?></textarea>
                     </div>
                 </div>
                                 <div class="modal-footer">
@@ -252,7 +268,7 @@ if(isset($_REQUEST["logout"])){
 
 <!-- View Modal -->
 <div class="modal fade" id="viewModal">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">View Capstone</h5>
@@ -284,6 +300,9 @@ if(isset($_REQUEST["logout"])){
        
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
 <script>
 
   function propa(event){
@@ -312,7 +331,8 @@ if(isset($_REQUEST["logout"])){
 
 
 
-function openViewModal(title, author, date_published, abstract, event) {
+function openViewModal(title, author, date_published, abstract) {
+    propa(event);
     var viewModal = document.getElementById('viewModal');
     var viewTitle = viewModal.querySelector('#view_title');
     var viewAuthor = viewModal.querySelector('#view_author');
@@ -322,7 +342,7 @@ function openViewModal(title, author, date_published, abstract, event) {
     viewTitle.textContent = title;
     viewAuthor.textContent = author;
     viewDatePublished.textContent = date_published;
-    viewAbstract.textContent = abstract;
+    viewAbstract.textContent = abstract;    
 
     var bsModal = new bootstrap.Modal(viewModal);
     bsModal.show();
@@ -334,16 +354,14 @@ hamBurger.addEventListener("click", function () {
 });
 
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
+
 <style>
+
 
 input.form-control {
   border: none;
   border-bottom: black solid 2px; 
   background: none; 
-  border-radius: none;
 }
 
 
