@@ -5,6 +5,7 @@ include('../functions/admin/add-admin.php');
 include('../functions/admin/edit-admin.php');
 include('../functions/admin/delete-admin.php');
 include('../functions/type.php');
+include('../functions/reset.php');
 ?>
 
 <?php
@@ -141,6 +142,7 @@ if(isset($_REQUEST["logout"])){
                                     <input type="date" name="to_date" id="sort" class="form-control shadow-none" value="<?php echo (isset($todate))? $todate: null;?>">
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-dark">Apply</button>
+                                        <a href="?reset" class="btn btn-dark d-inline">Reset</a>
                                     </div>
                                 </div>
                             </div>
