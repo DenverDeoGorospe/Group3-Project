@@ -5,6 +5,7 @@ include('../functions/admin/add-admin.php');
 include('../functions/admin/edit-admin.php');
 include('../functions/admin/delete-admin.php');
 include('../functions/type.php');
+include('../functions/reset.php');
 ?>
 
 <?php
@@ -61,7 +62,7 @@ if(isset($_REQUEST["logout"])){
         </li>
        
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a href="../pages/profile-admin.php" class="sidebar-link">
                 <i class="bi bi-person-circle"></i>
                 <span>Profile</span>
             </a>
@@ -141,6 +142,7 @@ if(isset($_REQUEST["logout"])){
                                     <input type="date" name="to_date" id="sort" class="form-control shadow-none" value="<?php echo (isset($todate))? $todate: null;?>">
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-dark">Apply</button>
+                                        <a href="?reset" class="btn btn-dark d-inline">Reset</a>
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +163,7 @@ if(isset($_REQUEST["logout"])){
                             $pdf_file = $capstone['pdf_file'];?>
                             
                             <div class="col-sm-4 mb-4">
-                                <div class="card bg-light h-100" onclick="openViewModal(`<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`)"> <!-- Added h-100 class to ensure all cards have the same height -->
+                                <div class="card bg-light h-100" onclick="openViewModal(`<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`)"> <!-- Added h-100 class to ensure all cards have the same height -->
                                     <div class="card-body d-flex flex-column"> <!-- Added flex-column class to align content vertically -->
                                         <label for="title" class="font-weight-bold">Title</label>
                                         <h5 class="card-title text-truncate"><?php echo $capstone['title']; ?></h5>
@@ -181,7 +183,7 @@ if(isset($_REQUEST["logout"])){
                                     <?php endif; ?>
                                         <div class="mt-3 d-flex justify-content-end">
                                             <!-- Edit button -->
-                                            <button type="button" class="btn btn-none edit-btn" onclick="openEditModal('<?php echo $capstone['id']; ?>', `<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`)">Edit</button>
+                                            <button type="button" class="btn btn-none edit-btn" onclick="openEditModal('<?php echo $capstone['id']; ?>', `<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`)">Edit</button>
                                             <!-- Delete button -->
                                             <a href="?delete=<?php echo $capstone['id']; ?>" class="btn btn-none" onclick="propa(event);">Delete</a>
                                         </div>

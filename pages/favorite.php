@@ -62,7 +62,7 @@ if(isset($_REQUEST["logout"])){
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a href="../pages/profile-user.php" class="sidebar-link">
                 <i class="bi bi-person-circle"></i>
                 <span>Profile</span>
             </a>
