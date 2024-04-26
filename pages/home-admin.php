@@ -61,7 +61,7 @@ if(isset($_REQUEST["logout"])){
         </li>
        
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a href="../pages/profile-admin.php" class="sidebar-link">
                 <i class="bi bi-person-circle"></i>
                 <span>Profile</span>
             </a>
