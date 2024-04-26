@@ -69,7 +69,7 @@ if(isset($_REQUEST["logout"])){
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a href="..pages/profi;e" class="sidebar-link">
                 <i class="bi bi-person-circle"></i>
                 <span>Profile</span>
             </a>
@@ -149,7 +149,7 @@ if(isset($_REQUEST["logout"])){
                                 $isFavorite = isCapstoneInFavorites($capstone['id'], $_SESSION['id']); 
                                 ?>
                         <div class="col-sm-4 mb-4">
-                            <div class="card bg-light h-100" onclick="openViewModal(`<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`,event)">
+                            <div class="card bg-light h-100" onclick="openViewModal(`<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`,event)">
                                 <a href="../functions/add_favorite.php?capstone_id=<?php echo $capstone['id']; ?>&id=<?php echo $_SESSION['id']; ?>" class="btn btn-none fs-5 text-right position-absolute top-0 end-0 p-3 favorite-icon" onclick="propa(event);">
                                     <?php if ($isFavorite): ?>
                                         <!-- Solid heart icon -->
