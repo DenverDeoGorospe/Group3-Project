@@ -18,10 +18,10 @@ if(!isset($_SESSION["id"])){
 	exit();
 }
 
-if($_SESSION['accountType'] != 'student'){
-    session_destroy();
-    header("location: ../pages/loginPage.php");
-    exit();
+if($_SESSION['accountType'] != 'admin'){
+  session_destroy();
+  header("location: ../pages/loginPage.php");
+  exit();
 }
 
 if(isset($_REQUEST["logout"])){
@@ -62,12 +62,6 @@ if(isset($_REQUEST["logout"])){
             <a href="../pages/home-user.php" class="sidebar-link">
                 <i class="bi bi-house-door-fill"></i>
                 <span>Home</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a href="../pages/favorite.php" class="sidebar-link">
-            <i class="bi bi-bookmark-heart-fill"></i>
-                <span>Favorites</span>
             </a>
         </li>
         <li class="sidebar-item">

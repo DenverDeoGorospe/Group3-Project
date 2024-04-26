@@ -29,6 +29,8 @@ if(isset($_REQUEST["logout"])){
 	header("location: ../pages/loginPage.php");
 	exit();
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +71,7 @@ if(isset($_REQUEST["logout"])){
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="..pages/profi;e" class="sidebar-link">
+            <a href="../pages/profile-user.php" class="sidebar-link">
                 <i class="bi bi-person-circle"></i>
                 <span>Profile</span>
             </a>

@@ -25,7 +25,7 @@ if(isset($_POST["btn-login"])){
 
 		require($myRoot."/Group3-Project/functions/connection/dbconn.php");
 		
-		$sql = "SELECT id,email,password, accountType FROM tbl_register WHERE email = :email";
+		$sql = "SELECT id,email,password,name,studentId, accountType FROM tbl_register WHERE email = :email";
 		
 		$val = array(":email" => $email);
 		
@@ -39,12 +39,18 @@ if(isset($_POST["btn-login"])){
 			if(password_verify($password, $row["password"]) && $row["accountType"] == 'admin'){
 				$_SESSION["accountType"] = $row["accountType"];
 				$_SESSION["id"] = $row["id"];
+				$_SESSION["email"] = $row["email"];
+                $_SESSION["name"] = $row["name"];
+				$_SESSION["studentId"] = $row["studentId"];
 				
 				header("Location:../pages/home-admin.php");
 				exit();
 			} else if(password_verify($password, $row["password"]) && $row["accountType"] == 'student'){
 				$_SESSION["accountType"] = $row["accountType"];
                 $_SESSION["id"] = $row["id"];
+				$_SESSION["email"] = $row["email"];
+                $_SESSION["name"] = $row["name"];
+				$_SESSION["studentId"] = $row["studentId"];
 				
 				header("Location: ../pages/home-user.php");
 				exit();
