@@ -149,7 +149,7 @@ if(isset($_REQUEST["logout"])){
                                 $isFavorite = isCapstoneInFavorites($capstone['id'], $_SESSION['id']); 
                                 ?>
                         <div class="col-sm-4 mb-4">
-                            <div class="card bg-light h-100" onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>',event)">
+                            <div class="card bg-light h-100" onclick="openViewModal(`<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`,event)">
                                 <a href="../functions/add_favorite.php?capstone_id=<?php echo $capstone['id']; ?>&id=<?php echo $_SESSION['id']; ?>" class="btn btn-none fs-5 text-right position-absolute top-0 end-0 p-3 favorite-icon" onclick="propa(event);">
                                     <?php if ($isFavorite): ?>
                                         <!-- Solid heart icon -->
