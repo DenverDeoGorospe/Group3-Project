@@ -30,13 +30,13 @@
 
 
                   <div data-mdb-input-init class="form-outline mt-5 mb-4">
-                    <input type="email" name="email" class="form-control"
+                    <input type="email" name="email" class="form-control shadow-none"
                       placeholder="Email address" required/>
                     
                   </div>
 
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" name="password" id="password-login" class="form-control" placeholder="Password" required/>
+                    <input type="password" name="password" id="password-login" class="form-control shadow-none" placeholder="Password" required/>
               
                   </div>
 
@@ -78,6 +78,20 @@
 </html>
 
 <style>
+
+    
+input.form-control {
+  border: none;
+  border-bottom: black solid 2px; 
+  background: none; 
+}
+
+
+input.form-control:focus {
+  border-bottom: solid 2px; 
+  outline: none;
+  background: none; 
+}
     .gradient-custom-2 {
 /* fallback for old browsers */
 background: #fccb90;

@@ -29,16 +29,16 @@
                 <form action="../functions/register.php" method="post">
                 <input type="hidden" name="action" value="add">
                 <div data-mdb-input-init class="form-outline mb-4">
-                <input class="form-control" type="text" name="name" id="name" placeholder="Name" required>
+                <input class="form-control shadow-none" type="text" name="name" id="name" placeholder="Name" required>
                   </div>
 
                   <div data-mdb-input-init class="form-outline mb-4">
-                  <input class="form-control" type="text" name="studentId" id="studentId" placeholder="Student Id" required>
+                  <input class="form-control shadow-none" type="text" name="studentId" id="studentId" placeholder="Student Id" required>
                   </div>
 
 
                   <div data-mdb-input-init class="form-outline mb-4">
-                  <select class="form-control" name="accountType" id="accountType" required>
+                  <select class="form-control shadow-none" name="accountType" id="accountType" style="border-bottom: black solid 2px; " required>
                                 <option value="">Select account type</option>
                                 <option value="student">Student</option>
                                 <option value="admin">Admin</option>
@@ -47,13 +47,13 @@
               
 
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="email" class="form-control" name="email" id="email" required
+                    <input type="email" class="form-control shadow-none" name="email" id="email" required
                       placeholder="Email address" />
                     
                   </div>
 
                   <div data-mdb-input-init class="form-outline mb-4">
-                    <input type="password" name="password" class="form-control" id="password" placeholder="Password" required/>
+                    <input type="password" name="password" class="form-control shadow-none" id="password" placeholder="Password" required/>
               
                   </div>
 
@@ -74,7 +74,7 @@
             </div>
             <div class="col-lg-6 d-flex align-items-center bg-dark" style="height: 80vh;">
               <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h4 class="mb-4">We are more than just a company</h4>
+                <h3 class="mb-4">Sign IN and start browing!</h3>
                 <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                   tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
                   exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -91,6 +91,20 @@
 </html>
 
 <style>
+
+  
+input.form-control {
+  border: none;
+  border-bottom: black solid 2px; 
+  background: none; 
+}
+
+
+input.form-control:focus {
+  border-bottom: solid 2px; 
+  outline: none;
+  background: none; 
+}
     .gradient-custom-2 {
 /* fallback for old browsers */
 background: #fccb90;
