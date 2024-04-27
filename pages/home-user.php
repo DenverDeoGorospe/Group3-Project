@@ -110,16 +110,26 @@ if(isset($_REQUEST["logout"])){
                         </div>
                         <!-- Date filter -->
                         <div class="row bg-light pb-3">
-                            <div class="col-sm-6">
-                                <div class="form-group d-flex">
-                                    <label class="mr-2 p-1">From</label>
-                                    <input type="date" name="from_date" id="sort" class="form-control shadow-none" value="<?php echo (isset($fromdate))? $fromdate: null;?>">
+                            <div class="col-3">
+                            <div class="form-group d-flex p-1">
+                                <label for="category" class="p-1">Category</label>
+                                <select class="form-control shadow-none" name="category" id="category" required>
+                                        <option value="">Select</option>
+                                        <option value="Web-Applicaiton">Web</option>
+                                        <option value="Mobile-Application">Mobile</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group d-flex">
-                                    <label class="mr-2 p-1">To</label>
-                                    <input type="date" name="to_date" id="sort" class="form-control shadow-none" value="<?php echo (isset($todate))? $todate: null;?>">
+                                    <label class="p-1">From</label>
+                                    <input type="date" name="from_date" id="sort" class="form-control shadow-none m-1" style="border:solid lightgray 1px; background:white;" value="<?php echo (isset($fromdate))? $fromdate: null;?>">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group d-flex">
+                                    <label class="p-1">To</label>
+                                    <input type="date" name="to_date" id="sort" class="form-control shadow-none m-1" style="border:solid lightgray 1px; background:white;" value="<?php echo (isset($todate))? $todate: null;?>">
                                     <div class="form-group p-1">
                                         <button type="submit" class="btn btn-outline-dark">Apply</button>
                                     </div>

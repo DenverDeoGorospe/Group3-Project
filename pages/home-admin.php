@@ -79,48 +79,49 @@ if(isset($_REQUEST["logout"])){
 
 <div class="container-fluid" style="overflow:hidden; height: 100%;">
     <div class="row" style="height:100vh;">
-        <div class="col-sm-3 bg-secondary text-light">
-            <div class="middle mt-3" style="overflow:hidden; height: 100%;">
-            <form method="POST" enctype="multipart/form-data">
-                <div class="h3 m-3 p-2 text-center">Add New Capstone</div>
-                        <input type="hidden" name="action" value="add">
-                        <input type="hidden" name="edit_id" id="edit_id" value="">
-                        <div class="form-group mt">
-                            <label for="title">Title:</label>
-                            <input type="text" class="form-control shadow-none text-white" id="title" name="title" required>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label for="author">Author:</label>
-                            <input type="text" class="form-control shadow-none text-white" id="author" name="author" required>
-                        </div>
-                        <div class="form-group mt">
-                            <label for="projectAdviser">Project Adviser</label>
-                            <input type="text" class="form-control shadow-none text-white" id="projectAdviser" name="projectAdviser" required>
-                        </div>
-                        <div class="form-group mt-3">
-                        <label for="category">Category</label>
-                        <select class="form-control" name="category" id="category" required>
-                                <option value="">Select account type</option>
-                                <option value="Web-Applicaiton">Web</option>
-                                <option value="Mobile-Application">Mobile</option>
-                            </select>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label for="date_pub">Date Published:</label>
-                            <input type="date" class="form-control shadow-none text-white" id="date_pub" name="date_pub" required>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label for="abstract">Abstract:</label>
-                            <textarea class="form-control shadow-none" id="abstract" name="abstract" rows="4" required></textarea>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label for="pdf_file">PDF File:</label>
-                            <input type="file" class="form-control shadow-none text-white bg-secondary border-0 text-light" id="pdf_file" name="pdf_file" accept=".pdf" required>
-                        </div>
-                        <button type="submit" class="btn btn-dark m-1" name="submit" style="float:right;">Add Capstone</button>
-                    </form>
+    <div class="col-lg-3 col-md-6 col-sm-12 bg-secondary text-light">
+    <div class="middle mt-3" style="overflow:hidden; height: 100%;">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="h3 text-center">Add New Capstone</div>
+            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="edit_id" id="edit_id" value="">
+            <div class="form-group mt">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control shadow-none text-white" id="title" name="title" required>
             </div>
-        </div>
+            <div class="form-group mt-3">
+                <label for="author">Author:</label>
+                <input type="text" class="form-control shadow-none text-white" id="author" name="author" required>
+            </div>
+            <div class="form-group mt">
+                <label for="projectAdviser">Project Adviser</label>
+                <input type="text" class="form-control shadow-none text-white" id="projectAdviser" name="projectAdviser" required>
+            </div>
+            <div class="form-group mt-3">
+                <label for="category">Category</label>
+                <select class="form-control" name="category" id="category" required>
+                    <option value="">Select category</option>
+                    <option value="Web-Applicaiton">Web</option>
+                    <option value="Mobile-Application">Mobile</option>
+                </select>
+            </div>
+            <div class="form-group mt-3">
+                <label for="date_pub">Date Published:</label>
+                <input type="date" class="form-control shadow-none text-white" id="date_pub" name="date_pub" required>
+            </div>
+            <div class="form-group mt-3">
+                <label for="abstract">Abstract:</label>
+                <textarea class="form-control shadow-none" id="abstract" name="abstract" rows="4" required></textarea>
+            </div>
+            <div class="form-group mt-3">
+                <label for="pdf_file">PDF File:</label>
+                <input type="file" class="form-control shadow-none text-white bg-secondary border-0 text-light" id="pdf_file" name="pdf_file" accept=".pdf" required>
+            </div>
+            <button type="submit" class="btn btn-dark m-1" name="submit" style="float:right;">Add Capstone</button>
+        </form>
+    </div>
+</div>
+
         <div class="col-sm-9" style="overflow-y:auto; height: 100%;">
             <div class="scrollable-right">
                 <!-- Capstone Manager -->
@@ -143,16 +144,26 @@ if(isset($_REQUEST["logout"])){
                         </div>
                         <!-- Date filter -->
                         <div class="row bg-light pb-3">
-                            <div class="col-sm-6">
-                                <div class="form-group d-flex">
-                                    <label class="mr-2 p-1">From</label>
-                                    <input type="date" name="from_date" id="sort" class="form-control shadow-none m-1" value="<?php echo (isset($fromdate))? $fromdate: null;?>">
+                            <div class="col-3">
+                            <div class="form-group d-flex p-1">
+                                <label for="category" class="p-1">Category</label>
+                                <select class="form-control shadow-none" name="category" id="category" required>
+                                        <option value="">Select</option>
+                                        <option value="Web-Applicaiton">Web</option>
+                                        <option value="Mobile-Application">Mobile</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group d-flex">
-                                    <label class="mr-2 p-1">To</label>
-                                    <input type="date" name="to_date" id="sort" class="form-control shadow-none m-1" value="<?php echo (isset($todate))? $todate: null;?>">
+                                    <label class="p-1">From</label>
+                                    <input type="date" name="from_date" id="sort" class="form-control shadow-none m-1" style="border:solid lightgray 1px; background:white;" value="<?php echo (isset($fromdate))? $fromdate: null;?>">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group d-flex">
+                                    <label class="p-1">To</label>
+                                    <input type="date" name="to_date" id="sort" class="form-control shadow-none m-1" style="border:solid lightgray 1px; background:white;" value="<?php echo (isset($todate))? $todate: null;?>">
                                     <div class="form-group p-1">
                                         <button type="submit" class="btn btn-outline-dark">Apply</button>
                                     </div>
