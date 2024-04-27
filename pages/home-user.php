@@ -14,19 +14,19 @@ include('../functions/heartfill.php');
 session_start();
 
 if(!isset($_SESSION["id"])){
-	header("location: ../pages/loginPage.php"); 
+	header("location: ../pages/login.php"); 
 	exit();
 }
 
 if($_SESSION['accountType'] != 'student'){
     session_destroy();
-    header("location: ../pages/loginPage.php");
+    header("location: ../pages/login.php");
     exit();
 }
 
 if(isset($_REQUEST["logout"])){
 	session_destroy();
-	header("location: ../pages/loginPage.php");
+	header("location: ../pages/login.php");
 	exit();
 }
 
@@ -110,18 +110,31 @@ if(isset($_REQUEST["logout"])){
                         </div>
                         <!-- Date filter -->
                         <div class="row bg-light pb-3">
-                            <div class="col-sm-6">
-                                <div class="form-group d-flex">
-                                    <label class="mr-2 p-1">From</label>
-                                    <input type="date" name="from_date" id="sort" class="form-control shadow-none" value="<?php echo (isset($fromdate))? $fromdate: null;?>">
+                            <div class="col-3">
+                            <div class="form-group d-flex p-1">
+                                <label for="category" class="p-1">Category</label>
+                                <select class="form-control shadow-none" name="category" id="category">
+                                        <option value="">Select</option>
+                                        <option value="Web-Application">Web</option>
+                                        <option value="Mobile-Application">Mobile</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group d-flex">
-                                    <label class="mr-2 p-1">To</label>
-                                    <input type="date" name="to_date" id="sort" class="form-control shadow-none" value="<?php echo (isset($todate))? $todate: null;?>">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-dark">Apply</button>
+                                    <label class="p-1">From</label>
+                                    <input type="date" name="from_date" id="sort" class="form-control shadow-none m-1" style="border:solid lightgray 1px; background:white;" value="<?php echo (isset($fromdate))? $fromdate: null;?>">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group d-flex">
+                                    <label class="p-1">To</label>
+                                    <input type="date" name="to_date" id="sort" class="form-control shadow-none m-1" style="border:solid lightgray 1px; background:white;" value="<?php echo (isset($todate))? $todate: null;?>">
+                                    <div class="form-group p-1">
+                                        <button type="submit" class="btn btn-outline-dark">Apply</button>
+                                    </div>
+                                    <div class="form-group p-1">
+                                        <a href="?reset" class="btn btn-outline-dark">Reset</a>
                                     </div>
                                 </div>
                             </div>
@@ -151,7 +164,7 @@ if(isset($_REQUEST["logout"])){
                                 $isFavorite = isCapstoneInFavorites($capstone['id'], $_SESSION['id']); 
                                 ?>
                         <div class="col-sm-4 mb-4">
-                            <div class="card bg-light h-100" onclick="openViewModal(`<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`,event)">
+                            <div class="card bg-light h-100" onclick="openViewModal(`<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', '<?php echo htmlspecialchars($capstone['projectAdviser']); ?>','<?php echo htmlspecialchars($capstone['category']); ?>',`<?php echo htmlspecialchars($capstone['abstract']); ?>`,event)">
                                 <a href="../functions/add_favorite.php?capstone_id=<?php echo $capstone['id']; ?>&id=<?php echo $_SESSION['id']; ?>" class="btn btn-none fs-5 text-right position-absolute top-0 end-0 p-3 favorite-icon" onclick="propa(event);">
                                     <?php if ($isFavorite): ?>
                                         <!-- Solid heart icon -->
@@ -166,11 +179,13 @@ if(isset($_REQUEST["logout"])){
                                     <label for="title" class="font-weight-bold">Title</label>
                                     <h5 class="card-title text-truncate"><?php echo $capstone['title']; ?></h5>
                                     <label for="author" class="font-weight-bold">Author</label>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $capstone['author']; ?></h6>
+                                    <h6 class="card-subtitle mb-2 text-muted text-truncate"><?php echo $capstone['author']; ?></h6>
+                                    <label for="author" class="font-weight-bold">Project Adviser</label>
+                                    <h6 class="card-subtitle mb-2 text-muted text-truncate"><?php echo $capstone['projectAdviser']; ?></h6>
+                                    <label for="author" class="font-weight-bold">Category</label>
+                                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $capstone['category']; ?></h6>
                                     <label for="date published" class="font-weight-bold">Date published</label>
-                                    <p class="card-text"><?php echo $capstone['date_published']; ?></p>
-                                    <label for="abstract" class="font-weight-bold">Abstract</label>
-                                    <p class="card-text text-truncate"><?php echo $capstone['abstract']; ?></p>
+                                    <p class="card-text text-muted"><?php echo $capstone['date_published']; ?></p>
                                     
                                     <?php if (!empty($pdf_file)): ?>
                                         <a href="<?php echo $pdf_file; ?>" download class="mt-auto">Download PDF</a> <!-- Added mt-auto class to push the link to the bottom -->
@@ -231,46 +246,6 @@ if(isset($_REQUEST["logout"])){
    
     </div>
 </div>
-    
-<!-- Modal for Editing -->
-<div class="modal fade" id="editModal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Edit Capstone</h5>
-                <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-            </div>
-            <form id="editForm" method="POST" action="../functions/admin/edit-admin.php"> 
-                <div class="modal-body">
-                <input type="hidden" name="action" value="edit">
-                <input type="hidden" name="edit_id" id="edit_id_modal" value="">
-                    <div class="form-group">
-                        <label for="title_modal">Title:</label>
-                        <input type="text" class="form-control shadow-none text-white" id="title_modal" name="title" value="<?php echo isset($capstone['title']) ? $capstone['title'] : ''; ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="author_modal">Author:</label>
-                        <input type="text" class="form-control shadow-none text-white" id="author_modal" name="author" value="<?php echo isset($capstone['author']) ? $capstone['author'] : ''; ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="date_pub_modal">Date Published:</label>
-                        <input type="date" class="form-control shadow-none text-white" id="date_pub_modal" name="date_pub" value="<?php echo isset($capstone['date_published']) ? $capstone['date_published'] : ''; ?>" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="abstract_modal">Abstract:</label>
-                        <textarea class="form-control shadow-none text-white" id="abstract_modal" name="abstract" rows="4" required><?php echo isset($capstone['abstract']) ? $capstone['abstract'] : ''; ?></textarea>
-                    </div>
-                </div>
-                                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="submit">Save Changes</button>
-                </div>
-
-
-            </form>
-        </div>
-    </div>
-</div>
 
 <!-- View Modal -->
 <div class="modal fade" id="viewModal">
@@ -285,13 +260,17 @@ if(isset($_REQUEST["logout"])){
                     <div class="row">
                         <div class="col">
                             <label for="view_title">Title</label>
-                            <p id="view_title" class="font-weight-bold"></p>
+                            <p id="view_title" class="font-weight-bold text-muted"></p>
                             <label for="view_author">Author</label>
-                            <p id="view_author" class="font-weight-bold"></p>
+                            <p id="view_author" class="font-weight-bold text-muted"></p>
+                            <label for="view_projectAdviser">Project Adviser</label>
+                            <p id="view_projectAdviser" class="font-weight-bold text-muted"></p>
+                            <label for="view_category">Category</label>
+                            <p id="view_category" class="text-muted"></p>
                             <label for="view_date_published">Date published</label>
-                            <p id="view_date_published" class="font-weight-bold"></p>
+                            <p id="view_date_published" class="font-weight-bold text-muted"></p>
                             <label for="view_abstract">Abstract</label>
-                            <p id="view_abstract"></p>
+                            <p id="view_abstract" class="text-muted"></p>
                         </div>
                     </div>
                 </div>
@@ -312,37 +291,23 @@ if(isset($_REQUEST["logout"])){
     event.stopPropagation();
   }
 
-  function openEditModal(editId, title, author, datePublished, abstract) {
-    propa(event);
-    var editModal = document.getElementById('editModal');
-    var titleInput = editModal.querySelector('#title_modal');
-    var authorInput = editModal.querySelector('#author_modal');
-    var datePubInput = editModal.querySelector('#date_pub_modal');
-    var abstractInput = editModal.querySelector('#abstract_modal');
-    var editIdInput = editModal.querySelector('#edit_id_modal');
-
-    titleInput.value = title;
-    authorInput.value = author;
-    datePubInput.value = datePublished;
-    abstractInput.value = abstract;
-    editIdInput.value = editId;
-
-    var bsModal = new bootstrap.Modal(editModal);
-    bsModal.show();
-}
 
 
 
 
-function openViewModal(title, author, date_published, abstract, event) {
+function openViewModal(title, author, date_published, projectAdviser, category, abstract, event) {
     var viewModal = document.getElementById('viewModal');
     var viewTitle = viewModal.querySelector('#view_title');
     var viewAuthor = viewModal.querySelector('#view_author');
+    var viewprojectAdviser = viewModal.querySelector('#view_projectAdviser');
+    var viewCategory= viewModal.querySelector('#view_category');
     var viewDatePublished = viewModal.querySelector('#view_date_published');
     var viewAbstract = viewModal.querySelector('#view_abstract');
 
     viewTitle.textContent = title;
     viewAuthor.textContent = author;
+    viewprojectAdviser.textContent = projectAdviser;
+    viewCategory.textContent = category;
     viewDatePublished.textContent = date_published;
     viewAbstract.textContent = abstract;
 

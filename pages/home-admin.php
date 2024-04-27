@@ -12,19 +12,19 @@ include('../functions/reset.php');
 session_start();
 
 if(!isset($_SESSION["id"])){
-	header("location: ../pages/loginPage.php"); 
+	header("location: ../pages/login.php"); 
 	exit();
 }
 
 if($_SESSION['accountType'] != 'admin'){
     session_destroy();
-    header("location: ../pages/loginPage.php");
+    header("location: ../pages/login.php");
     exit();
 }
 
 if(isset($_REQUEST["logout"])){
 	session_destroy();
-	header("location: ../pages/loginPage.php");
+	header("location: ../pages/login.php");
 	exit();
 }
 ?>
@@ -79,35 +79,49 @@ if(isset($_REQUEST["logout"])){
 
 <div class="container-fluid" style="overflow:hidden; height: 100%;">
     <div class="row" style="height:100vh;">
-        <div class="col-sm-3 bg-secondary text-light">
-            <div class="middle mt-3" style="overflow:hidden; height: 100%;">
-            <form method="POST" enctype="multipart/form-data">
-                        <input type="hidden" name="action" value="add">
-                        <input type="hidden" name="edit_id" id="edit_id" value="">
-                        <div class="form-group">
-                            <label for="title">Title:</label>
-                            <input type="text" class="form-control shadow-none text-white" id="title" name="title" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="author">Author:</label>
-                            <input type="text" class="form-control shadow-none text-white" id="author" name="author" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="date_pub">Date Published:</label>
-                            <input type="date" class="form-control shadow-none text-white" id="date_pub" name="date_pub" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="abstract">Abstract:</label>
-                            <textarea class="form-control shadow-none" id="abstract" name="abstract" rows="4" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="pdf_file">PDF File:</label>
-                            <input type="file" class="form-control shadow-none text-white bg-secondary border-0 text-light" id="pdf_file" name="pdf_file" accept=".pdf" required>
-                        </div>
-                        <button type="submit" class="btn btn-dark m-1" name="submit" style="float:right;">Add Capstone</button>
-                    </form>
+    <div class="col-lg-3 col-md-6 col-sm-12 bg-secondary text-light"  style="overflow-y:auto; height: 100%;">
+    <div class="middle mt-3">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="h3 text-center">Add New Capstone</div>
+            <input type="hidden" name="action" value="add">
+            <input type="hidden" name="edit_id" id="edit_id" value="">
+            <div class="form-group mt">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control shadow-none text-white" id="title" name="title" required>
             </div>
-        </div>
+            <div class="form-group mt-3">
+                <label for="author">Author:</label>
+                <input type="text" class="form-control shadow-none text-white" id="author" name="author" required>
+            </div>
+            <div class="form-group mt">
+                <label for="projectAdviser">Project Adviser</label>
+                <input type="text" class="form-control shadow-none text-white" id="projectAdviser" name="projectAdviser" required>
+            </div>
+            <div class="form-group mt-3">
+                <label for="category">Category</label>
+                <select class="form-control" name="category" id="category" required>
+                    <option value="">Select category</option>
+                    <option value="Web-Application">Web</option>
+                    <option value="Mobile-Application">Mobile</option>
+                </select>
+            </div>
+            <div class="form-group mt-3">
+                <label for="date_pub">Date Published:</label>
+                <input type="date" class="form-control shadow-none text-white" id="date_pub" name="date_pub" required>
+            </div>
+            <div class="form-group mt-3">
+                <label for="abstract">Abstract:</label>
+                <textarea class="form-control shadow-none" id="abstract" name="abstract" rows="4" required></textarea>
+            </div>
+            <div class="form-group mt-3">
+                <label for="pdf_file">PDF File:</label>
+                <input type="file" class="form-control shadow-none text-white bg-secondary border-0 text-light" id="pdf_file" name="pdf_file" accept=".pdf" required>
+            </div>
+            <button type="submit" class="btn btn-dark m-1" name="submit" style="float:right;">Add Capstone</button>
+        </form>
+    </div>
+</div>
+
         <div class="col-sm-9" style="overflow-y:auto; height: 100%;">
             <div class="scrollable-right">
                 <!-- Capstone Manager -->
@@ -130,16 +144,26 @@ if(isset($_REQUEST["logout"])){
                         </div>
                         <!-- Date filter -->
                         <div class="row bg-light pb-3">
-                            <div class="col-sm-6">
-                                <div class="form-group d-flex">
-                                    <label class="mr-2 p-1">From</label>
-                                    <input type="date" name="from_date" id="sort" class="form-control shadow-none m-1" value="<?php echo (isset($fromdate))? $fromdate: null;?>">
+                            <div class="col-3">
+                            <div class="form-group d-flex p-1">
+                                <label for="category" class="p-1">Category</label>
+                                <select class="form-control shadow-none" name="category" id="category">
+                                        <option value="">Select</option>
+                                        <option value="Web-Application">Web</option>
+                                        <option value="Mobile-Application">Mobile</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-4">
                                 <div class="form-group d-flex">
-                                    <label class="mr-2 p-1">To</label>
-                                    <input type="date" name="to_date" id="sort" class="form-control shadow-none m-1" value="<?php echo (isset($todate))? $todate: null;?>">
+                                    <label class="p-1">From</label>
+                                    <input type="date" name="from_date" id="sort" class="form-control shadow-none m-1" style="border:solid lightgray 1px; background:white;" value="<?php echo (isset($fromdate))? $fromdate: null;?>">
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-group d-flex">
+                                    <label class="p-1">To</label>
+                                    <input type="date" name="to_date" id="sort" class="form-control shadow-none m-1" style="border:solid lightgray 1px; background:white;" value="<?php echo (isset($todate))? $todate: null;?>">
                                     <div class="form-group p-1">
                                         <button type="submit" class="btn btn-outline-dark">Apply</button>
                                     </div>
@@ -165,16 +189,18 @@ if(isset($_REQUEST["logout"])){
                             $pdf_file = $capstone['pdf_file'];?>
                             
                             <div class="col-sm-4 mb-4">
-                                <div class="card bg-light h-100" onclick="openViewModal(`<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`)"> <!-- Added h-100 class to ensure all cards have the same height -->
+                                <div class="card bg-light h-100" onclick="openViewModal(`<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>','<?php echo htmlspecialchars($capstone['projectAdviser']); ?>','<?php echo htmlspecialchars($capstone['category']); ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`)"> <!-- Added h-100 class to ensure all cards have the same height -->
                                     <div class="card-body d-flex flex-column"> <!-- Added flex-column class to align content vertically -->
                                         <label for="title" class="font-weight-bold">Title</label>
                                         <h5 class="card-title text-truncate"><?php echo $capstone['title']; ?></h5>
-                                        <label for="author" class="font-weight-bold">Author</label>
-                                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $capstone['author']; ?></h6>
+                                        <label for="author" class="font-weight-bold ">Author</label>
+                                        <h6 class="card-subtitle mb-2 text-muted text-truncate"><?php echo $capstone['author']; ?></h6>
+                                        <label for="projectAdviser" class="font-weight-bold">Project Adviser</label>
+                                        <p class="card-text text-muted mb-2 text-truncate"><?php echo $capstone['projectAdviser']; ?></p>
+                                        <label for="category" class="font-weight-bold">Category</label>
+                                        <h6 class="card-subtitle mb-2 text-muted"><?php echo $capstone['category']; ?></h6>
                                         <label for="date published" class="font-weight-bold">Date published</label>
-                                        <p class="card-text"><?php echo $capstone['date_published']; ?></p>
-                                        <label for="abstract" class="font-weight-bold">Abstract</label>
-                                        <p class="card-text text-truncate"><?php echo $capstone['abstract']; ?></p>
+                                        <p class="card-text text-muted"><?php echo $capstone['date_published']; ?></p>
                                         
                                     <?php if (!empty($pdf_file)): ?>
                                         <a href="<?php echo $pdf_file; ?>" download class="mt-auto" onclick="propa(event)">Download PDF</a> <!-- Added mt-auto class to push the link to the bottom -->
@@ -185,7 +211,7 @@ if(isset($_REQUEST["logout"])){
                                     <?php endif; ?>
                                         <div class="mt-3 d-flex justify-content-end">
                                             <!-- Edit button -->
-                                            <button type="button" class="btn btn-none edit-btn" onclick="openEditModal('<?php echo $capstone['id']; ?>', `<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', `<?php echo htmlspecialchars($capstone['abstract']); ?>`)">Edit</button>
+                                            <button type="button" class="btn btn-none edit-btn" onclick="openEditModal('<?php echo $capstone['id']; ?>', `<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', '<?php echo htmlspecialchars($capstone['projectAdviser']); ?>','<?php echo htmlspecialchars($capstone['category']); ?>',`<?php echo htmlspecialchars($capstone['abstract']); ?>`)">Edit</button>
                                             <!-- Delete button -->
                                             <a href="?delete=<?php echo $capstone['id']; ?>" class="btn btn-none" onclick="propa(event);">Delete</a>
                                         </div>
@@ -242,19 +268,31 @@ if(isset($_REQUEST["logout"])){
                 <div class="modal-body">
                 <input type="hidden" name="action" value="edit">
                 <input type="hidden" name="edit_id" id="edit_id_modal" value="">
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="title_modal">Title:</label>
                         <input type="text" class="form-control shadow-none text-dark" id="title_modal" name="title" value="<?php echo isset($capstone['title']) ? $capstone['title'] : ''; ?>" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="author_modal">Author:</label>
                         <input type="text" class="form-control shadow-none text-dark" id="author_modal" name="author" value="<?php echo isset($capstone['author']) ? $capstone['author'] : ''; ?>" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <label for="date_pub_modal">Date Published:</label>
                         <input type="date" class="form-control shadow-none text-dark" id="date_pub_modal" name="date_pub" value="<?php echo isset($capstone['date_published']) ? $capstone['date_published'] : ''; ?>" required>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-3">
+                        <label for="projectAdviser_modal">Project Adviser:</label>
+                        <input text="text" class="form-control shadow-none text-dark" id="projectAdviser_modal" name="projectAdviser" value="<?php echo isset($capstone['projectAdviser']) ? $capstone['projectAdviser'] : ''; ?>" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="category_modal">Category:</label>
+                        <select class="form-control" id="category_modal" name="category" value="<?php echo isset($capstone['category']) ? $capstone['category'] : ''; ?>" required>
+                                <option value="">Select account type</option>
+                                <option value="Web-Applicaiton">Web</option>
+                                <option value="Mobile-Application">Mobile</option>
+                            </select>
+                    </div>
+                    <div class="form-group mb-3">
                         <label for="abstract_modal">Abstract:</label>
                         <textarea class="form-control shadow-none text-dark" id="abstract_modal" name="abstract" rows="4" required><?php echo isset($capstone['abstract']) ? $capstone['abstract'] : ''; ?></textarea>
                     </div>
@@ -283,13 +321,17 @@ if(isset($_REQUEST["logout"])){
                     <div class="row">
                         <div class="col">
                             <label for="view_title">Title</label>
-                            <p id="view_title" class="font-weight-bold"></p>
+                            <p id="view_title" class="font-weight-bold text-muted"></p>
                             <label for="view_author">Author</label>
-                            <p id="view_author" class="font-weight-bold"></p>
+                            <p id="view_author" class="font-weight-bold text-muted"></p>
                             <label for="view_date_published">Date published</label>
-                            <p id="view_date_published" class="font-weight-bold"></p>
+                            <p id="view_date_published" class="font-weight-bold text-muted"></p>
+                            <label for="view_projectAdviser">Project Adviser</label>
+                            <p id="view_projectAdviser" class="font-weight-bold text-muted"></p>
+                            <label for="view_category">Category</label>
+                            <p id="view_category" class="font-weight-bold text-muted"></p>
                             <label for="view_abstract">Abstract</label>
-                            <p id="view_abstract"></p>
+                            <p id="view_abstract" class="text-muted"></p>
                         </div>
                     </div>
                 </div>
@@ -313,17 +355,21 @@ if(isset($_REQUEST["logout"])){
     event.stopPropagation();
   }
 
-  function openEditModal(editId, title, author, datePublished, abstract) {
+  function openEditModal(editId, title, author, datePublished, projectAdviser, category, abstract) {
     propa(event);
     var editModal = document.getElementById('editModal');
     var titleInput = editModal.querySelector('#title_modal');
     var authorInput = editModal.querySelector('#author_modal');
+    var projectAdviserInput = editModal.querySelector('#projectAdviser_modal');
+    var categoryInput = editModal.querySelector('#category_modal');
     var datePubInput = editModal.querySelector('#date_pub_modal');
     var abstractInput = editModal.querySelector('#abstract_modal');
     var editIdInput = editModal.querySelector('#edit_id_modal');
 
     titleInput.value = title;
     authorInput.value = author;
+    projectAdviserInput.value = projectAdviser;
+    categoryInput.value= category;
     datePubInput.value = datePublished;
     abstractInput.value = abstract;
     editIdInput.value = editId;
@@ -335,16 +381,20 @@ if(isset($_REQUEST["logout"])){
 
 
 
-function openViewModal(title, author, date_published, abstract) {
+function openViewModal(title, author, date_published, projectAdviser, category, abstract) {
     propa(event);
     var viewModal = document.getElementById('viewModal');
     var viewTitle = viewModal.querySelector('#view_title');
     var viewAuthor = viewModal.querySelector('#view_author');
     var viewDatePublished = viewModal.querySelector('#view_date_published');
+    var viewprojectAdviser = viewModal.querySelector('#view_projectAdviser');
+    var viewCategory = viewModal.querySelector('#view_category');
     var viewAbstract = viewModal.querySelector('#view_abstract');
 
     viewTitle.textContent = title;
     viewAuthor.textContent = author;
+    viewprojectAdviser.textContent = projectAdviser;
+    viewCategory.textContent = category;
     viewDatePublished.textContent = date_published;
     viewAbstract.textContent = abstract;    
 

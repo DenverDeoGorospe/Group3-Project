@@ -7,19 +7,19 @@ include('../functions/fave-get.php');
 session_start();
 
 if(!isset($_SESSION["id"])){
-	header("location: ../pages/loginPage.php"); 
+	header("location: ../pages/login.php"); 
 	exit();
 }
 
 if($_SESSION['accountType'] != 'student'){
     session_destroy();
-    header("location: ../pages/loginPage.php");
+    header("location: ../pages/login.php");
     exit();
 }
 
 if(isset($_REQUEST["logout"])){
 	session_destroy();
-	header("location: ../pages/loginPage.php");
+	header("location: ../pages/login.php");
 	exit();
 }
 ?>
@@ -91,7 +91,7 @@ if(isset($_REQUEST["logout"])){
                             <div class="col-sm-12 text-center">
                                 <div style="display: inline-block; width:75%;">
                                     <div class="input-group m-3">
-                                        <input type="text" class="form-control shadow-none" id="capSearch" placeholder="Search" name="forSearch" value="<?php echo (isset($searchVal))? $searchVal: null;?>">
+                                        <input type="text" class="form-control shadow-none" id="capSearch" placeholder="Search" name="forSearchFave" value="<?php echo (isset($searchVal))? $searchVal: null;?>">
                                         <button type="submit" name="capSearch" value="SEARCH" class="btn btn-primary rounded-pill text-light bg-dark border-none" style="border:none;">
                                             <i class="bi bi-search"></i>
                                         </button>
@@ -122,17 +122,19 @@ if(isset($_REQUEST["logout"])){
                         $pdf_file = $capstone['pdf_file'];
                     ?>
                         <div class="col-sm-4 mb-4">
-                            <div class="card bg-light h-100" onclick="openViewModal('<?php echo $capstone['title']; ?>', '<?php echo $capstone['author']; ?>', '<?php echo $capstone['date_published']; ?>', '<?php echo $capstone['abstract']; ?>',event)"> 
+                            <div class="card bg-light h-100" onclick="openViewModal(`<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', '<?php echo htmlspecialchars($capstone['projectAdviser']); ?>','<?php echo htmlspecialchars($capstone['category']); ?>',`<?php echo htmlspecialchars($capstone['abstract']); ?>`,event)"> 
                             <a href="../functions/fave-delete.php?delete=<?php echo $capstone['id']; ?>" class="btn btn-none fs-5 text-right position-absolute top-0 end-0 p-3 favorite-icon" onclick="propa(event)"><i class="bi bi-heart-fill text-danger"></i></a>
                                 <div class="card-body d-flex flex-column"> <!-- Added flex-column class to align content vertically -->
                                     <label for="title" class="font-weight-bold">Title</label>
                                     <h5 class="card-title text-truncate"><?php echo $capstone['title']; ?></h5>
                                     <label for="author" class="font-weight-bold">Author</label>
-                                    <h6 class="card-subtitle mb-2 text-muted"><?php echo $capstone['author']; ?></h6>
+                                    <h6 class="card-subtitle mb-2 text-muted text-truncate"><?php echo $capstone['author']; ?></h6>
+                                    <label for="projectAdviser" class="font-weight-bold">Project Adviser</label>
+                                    <h6 class="card-subtitle mb-2 text-muted text-truncate"><?php echo $capstone['projectAdviser']; ?></h6>
+                                    <label for="category" class="font-weight-bold">Category</label>
+                                    <h6 class="card-subtitle mb-2 text-muted text-truncate"><?php echo $capstone['category']; ?></h6>
                                     <label for="date published" class="font-weight-bold">Date published</label>
-                                    <p class="card-text"><?php echo $capstone['date_published']; ?></p>
-                                    <label for="abstract" class="font-weight-bold">Abstract</label>
-                                    <p class="card-text text-truncate"><?php echo $capstone['abstract']; ?></p>
+                                    <p class="card-text text-muted"><?php echo $capstone['date_published']; ?></p>
                                     
                                     <?php if (!empty($pdf_file)): ?>
                                         <a href="<?php echo $pdf_file; ?>" download class="mt-auto">Download PDF</a> <!-- Added mt-auto class to push the link to the bottom -->
@@ -220,13 +222,17 @@ if(isset($_REQUEST["logout"])){
                     <div class="row">
                         <div class="col">
                             <label for="view_title">Title</label>
-                            <p id="view_title" class="font-weight-bold"></p>
+                            <p id="view_title" class="font-weight-bold text-muted"></p>
                             <label for="view_author">Author</label>
-                            <p id="view_author" class="font-weight-bold"></p>
+                            <p id="view_author" class="font-weight-bold text-muted"></p>
+                            <label for="view_author">Project Adviser</label>
+                            <p id="view_projectAdviser" class="font-weight-bold text-muted"></p>
+                            <label for="view_author">Category</label>
+                            <p id="view_category" class="font-weight-bold text-muted"></p>
                             <label for="view_date_published">Date published</label>
-                            <p id="view_date_published" class="font-weight-bold"></p>
+                            <p id="view_date_published" class="font-weight-bold text-muted"></p>
                             <label for="view_abstract">Abstract</label>
-                            <p id="view_abstract"></p>
+                            <p id="view_abstract" class="text-muted"></p>
                         </div>
                     </div>
                 </div>
@@ -247,37 +253,23 @@ if(isset($_REQUEST["logout"])){
     event.stopPropagation();
   }
 
-  function openEditModal(editId, title, author, datePublished, abstract) {
-    propa(event);
-    var editModal = document.getElementById('editModal');
-    var titleInput = editModal.querySelector('#title_modal');
-    var authorInput = editModal.querySelector('#author_modal');
-    var datePubInput = editModal.querySelector('#date_pub_modal');
-    var abstractInput = editModal.querySelector('#abstract_modal');
-    var editIdInput = editModal.querySelector('#edit_id_modal');
-
-    titleInput.value = title;
-    authorInput.value = author;
-    datePubInput.value = datePublished;
-    abstractInput.value = abstract;
-    editIdInput.value = editId;
-
-    var bsModal = new bootstrap.Modal(editModal);
-    bsModal.show();
-}
 
 
 
 
-function openViewModal(title, author, date_published, abstract, event) {
+function openViewModal(title, author, date_published, projectAdviser, category, abstract, event) {
     var viewModal = document.getElementById('viewModal');
     var viewTitle = viewModal.querySelector('#view_title');
     var viewAuthor = viewModal.querySelector('#view_author');
+    var viewprojectAdviser = viewModal.querySelector('#view_projectAdviser');
+    var viewCategory = viewModal.querySelector('#view_category');
     var viewDatePublished = viewModal.querySelector('#view_date_published');
     var viewAbstract = viewModal.querySelector('#view_abstract');
 
     viewTitle.textContent = title;
     viewAuthor.textContent = author;
+    viewprojectAdviser.textContent = projectAdviser;
+    viewCategory.textContent = category;
     viewDatePublished.textContent = date_published;
     viewAbstract.textContent = abstract;
 
