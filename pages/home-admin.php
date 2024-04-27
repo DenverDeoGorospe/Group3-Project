@@ -101,7 +101,7 @@ if(isset($_REQUEST["logout"])){
                 <label for="category">Category</label>
                 <select class="form-control" name="category" id="category" required>
                     <option value="">Select category</option>
-                    <option value="Web-Applicaiton">Web</option>
+                    <option value="Web-Application">Web</option>
                     <option value="Mobile-Application">Mobile</option>
                 </select>
             </div>
