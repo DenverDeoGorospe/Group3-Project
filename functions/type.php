@@ -10,9 +10,10 @@ if($searchVal == null && $fromdate == null && $todate == null && $catego == null
     $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE is_status = '1'");
 }else if($fromdate == null && $todate == null && $catego == null){
     $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE title LIKE '%$searchVal%' AND is_status = '1'");
-}else if($fromdate == null && $todate == null && $catego != null && $searchVal == null){
+}else if($fromdate == null && $todate == null && $searchVal == null && $catego != null){
     $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE category = '$catego' AND is_status = '1'");
-    
+}else if($fromdate != null && $todate != null && $searchVal == null && $catego == null){
+    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND is_status = '1'");
 }
 else if($searchVal != null && $fromdate != null && $todate != null && $catego != null){
     $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND title LIKE '%$searchVal%' AND category = $catego AND is_status = '1'");
