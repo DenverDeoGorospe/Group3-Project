@@ -133,16 +133,18 @@ if(isset($_REQUEST["logout"])){
                             <div class="col-sm-6">
                                 <div class="form-group d-flex">
                                     <label class="mr-2 p-1">From</label>
-                                    <input type="date" name="from_date" id="sort" class="form-control shadow-none" value="<?php echo (isset($fromdate))? $fromdate: null;?>">
+                                    <input type="date" name="from_date" id="sort" class="form-control shadow-none m-1" value="<?php echo (isset($fromdate))? $fromdate: null;?>">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group d-flex">
                                     <label class="mr-2 p-1">To</label>
-                                    <input type="date" name="to_date" id="sort" class="form-control shadow-none" value="<?php echo (isset($todate))? $todate: null;?>">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-dark">Apply</button>
-                                        <a href="?reset" class="btn btn-dark d-inline">Reset</a>
+                                    <input type="date" name="to_date" id="sort" class="form-control shadow-none m-1" value="<?php echo (isset($todate))? $todate: null;?>">
+                                    <div class="form-group p-1">
+                                        <button type="submit" class="btn btn-outline-dark">Apply</button>
+                                    </div>
+                                    <div class="form-group p-1">
+                                        <a href="?reset" class="btn btn-outline-dark">Reset</a>
                                     </div>
                                 </div>
                             </div>
