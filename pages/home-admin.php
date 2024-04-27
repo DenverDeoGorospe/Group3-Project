@@ -147,9 +147,9 @@ if(isset($_REQUEST["logout"])){
                             <div class="col-3">
                             <div class="form-group d-flex p-1">
                                 <label for="category" class="p-1">Category</label>
-                                <select class="form-control shadow-none" name="category" id="category" required>
+                                <select class="form-control shadow-none" name="category" id="category">
                                         <option value="">Select</option>
-                                        <option value="Web-Applicaiton">Web</option>
+                                        <option value="Web-Application">Web</option>
                                         <option value="Mobile-Application">Mobile</option>
                                     </select>
                                 </div>
