@@ -1,7 +1,7 @@
 <?php
 include('../functions/connection/dbconn.php');
 
-if(isset($_POST['submit']) && isset($_POST['action']) && $_POST['action'] === 'add') {
+if(isset($_POST['action']) && $_POST['action'] === 'add') {
     $name = $_POST['name'];
     $studentId = $_POST['studentId'];
     $accountType = $_POST['accountType'];
