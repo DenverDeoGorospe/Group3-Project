@@ -58,7 +58,7 @@
                   </div>
 
                   <div class="text-center pt-1 mb-1 pb-1">
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-dark btn-block fa-lg  mb-3" type="submit" name="btn-login">Register</button>
+                    <button data-mdb-button-init data-mdb-ripple-init class="form-control btn btn-dark btn-block fa-lg  mb-3" type="submit" name="btn-login">Register</button>
                   
                   </div>
                   </form>
@@ -72,20 +72,22 @@
 
               </div>
             </div>
-            <div class="col-lg-6 d-flex align-items-center bg-dark" style="height: 80vh;">
-              <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                <h3 class="mb-4">Sign IN and start browing!</h3>
-                <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <div class="col-lg-6 d-flex align-items-center position-relative" style="height: 80vh;">
+              <img src="../assets/loginIMG.png" alt="Background Image" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0;">
+              <div class="bg-dark" style="opacity: 0.5; width: 100%; height: 100%; position: absolute; top: 0; left: 0;"></div>
+              <div class="h1 px-3 py-4 p-md-5 mx-md-4 text-white position-relative" style="font-size: 80px; z-index: 1; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+                  Let's Create an Account
               </div>
-            </div>
+          </div>
+
+
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
     
 </body>
 </html>
