@@ -19,7 +19,7 @@ if(isset($_POST['submit']) && isset($_POST['action']) && $_POST['action'] === 'a
 
     try {
         $stmt->execute();
-        header("Location:../pages/loginPage.php");
+        header("Location:../pages/login.php");
         exit;
     } catch(PDOException $e) {
         echo "Error: " . $e->getMessage();

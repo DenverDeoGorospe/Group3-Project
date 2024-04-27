@@ -12,19 +12,19 @@ include('../functions/reset.php');
 session_start();
 
 if(!isset($_SESSION["id"])){
-	header("location: ../pages/loginPage.php"); 
+	header("location: ../pages/login.php"); 
 	exit();
 }
 
 if($_SESSION['accountType'] != 'admin'){
     session_destroy();
-    header("location: ../pages/loginPage.php");
+    header("location: ../pages/login.php");
     exit();
 }
 
 if(isset($_REQUEST["logout"])){
 	session_destroy();
-	header("location: ../pages/loginPage.php");
+	header("location: ../pages/login.php");
 	exit();
 }
 ?>
@@ -82,25 +82,26 @@ if(isset($_REQUEST["logout"])){
         <div class="col-sm-3 bg-secondary text-light">
             <div class="middle mt-3" style="overflow:hidden; height: 100%;">
             <form method="POST" enctype="multipart/form-data">
+                <div class="h3 m-3 p-2 text-center">Add New Capstone</div>
                         <input type="hidden" name="action" value="add">
                         <input type="hidden" name="edit_id" id="edit_id" value="">
-                        <div class="form-group">
+                        <div class="form-group mt">
                             <label for="title">Title:</label>
                             <input type="text" class="form-control shadow-none text-white" id="title" name="title" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <label for="author">Author:</label>
                             <input type="text" class="form-control shadow-none text-white" id="author" name="author" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <label for="date_pub">Date Published:</label>
                             <input type="date" class="form-control shadow-none text-white" id="date_pub" name="date_pub" required>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <label for="abstract">Abstract:</label>
                             <textarea class="form-control shadow-none" id="abstract" name="abstract" rows="4" required></textarea>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mt-3">
                             <label for="pdf_file">PDF File:</label>
                             <input type="file" class="form-control shadow-none text-white bg-secondary border-0 text-light" id="pdf_file" name="pdf_file" accept=".pdf" required>
                         </div>

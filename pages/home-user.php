@@ -14,19 +14,19 @@ include('../functions/heartfill.php');
 session_start();
 
 if(!isset($_SESSION["id"])){
-	header("location: ../pages/loginPage.php"); 
+	header("location: ../pages/login.php"); 
 	exit();
 }
 
 if($_SESSION['accountType'] != 'student'){
     session_destroy();
-    header("location: ../pages/loginPage.php");
+    header("location: ../pages/login.php");
     exit();
 }
 
 if(isset($_REQUEST["logout"])){
 	session_destroy();
-	header("location: ../pages/loginPage.php");
+	header("location: ../pages/login.php");
 	exit();
 }
 
