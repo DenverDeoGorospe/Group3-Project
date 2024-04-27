@@ -91,7 +91,7 @@ if(isset($_REQUEST["logout"])){
                             <div class="col-sm-12 text-center">
                                 <div style="display: inline-block; width:75%;">
                                     <div class="input-group m-3">
-                                        <input type="text" class="form-control shadow-none" id="capSearch" placeholder="Search" name="forSearch" value="<?php echo (isset($searchVal))? $searchVal: null;?>">
+                                        <input type="text" class="form-control shadow-none" id="capSearch" placeholder="Search" name="forSearchFave" value="<?php echo (isset($searchVal))? $searchVal: null;?>">
                                         <button type="submit" name="capSearch" value="SEARCH" class="btn btn-primary rounded-pill text-light bg-dark border-none" style="border:none;">
                                             <i class="bi bi-search"></i>
                                         </button>

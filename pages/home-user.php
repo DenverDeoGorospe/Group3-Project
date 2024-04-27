@@ -120,8 +120,11 @@ if(isset($_REQUEST["logout"])){
                                 <div class="form-group d-flex">
                                     <label class="mr-2 p-1">To</label>
                                     <input type="date" name="to_date" id="sort" class="form-control shadow-none" value="<?php echo (isset($todate))? $todate: null;?>">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-dark">Apply</button>
+                                    <div class="form-group p-1">
+                                        <button type="submit" class="btn btn-outline-dark">Apply</button>
+                                    </div>
+                                    <div class="form-group p-1">
+                                        <a href="?reset" class="btn btn-outline-dark">Reset</a>
                                     </div>
                                 </div>
                             </div>
