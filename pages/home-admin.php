@@ -80,7 +80,7 @@ if(isset($_REQUEST["logout"])){
 <div class="container-fluid" style="overflow:hidden; height: 100%;">
     <div class="row" style="height:100vh;">
     <div class="col-lg-3 col-md-6 col-sm-12 bg-secondary text-light">
-    <div class="middle mt-3" style="overflow:hidden; height: 100%;">
+    <div class="middle mt-3" style="overflow-y:auto; height: 100%;">
         <form method="POST" enctype="multipart/form-data">
             <div class="h3 text-center">Add New Capstone</div>
             <input type="hidden" name="action" value="add">
