@@ -12,15 +12,19 @@ if(isset($_POST['submit']) && isset($_POST['action']) && $_POST['action'] === 'e
     $author = $_POST['author'];
     $date_pub = $_POST['date_pub'];
     $abstract = $_POST['abstract'];
+    $projectAdviser = $_POST['projectAdviser'];
+    $category = $_POST['category'];
     $id = $_POST['edit_id'];
 
-    $sql = "UPDATE tblcapstone SET title=:title, author=:author, date_published=:date_pub, abstract=:abstract WHERE id=:id";
+    $sql = "UPDATE tblcapstone SET title=:title, author=:author, date_published=:date_pub, projectAdviser = :projectAdviser, category=:category, abstract=:abstract WHERE id=:id";
 
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':title', $title);
     $stmt->bindParam(':author', $author);
     $stmt->bindParam(':date_pub', $date_pub);
     $stmt->bindParam(':abstract', $abstract);
+    $stmt->bindParam(':projectAdviser', $projectAdviser);
+    $stmt->bindParam(':category', $category);
     $stmt->bindParam(':id', $id);
 
     try {

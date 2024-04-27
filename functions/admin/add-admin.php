@@ -7,6 +7,8 @@ if(isset($_POST['submit']) && isset($_POST['action']) && $_POST['action'] === 'a
     $author = $_POST['author'];
     $date_pub = $_POST['date_pub'];
     $abstract = $_POST['abstract'];
+    $projectAdviser = $_POST['projectAdviser'];
+    $category = $_POST['category'];
     $status = 1;
 
     // File upload handling
@@ -17,14 +19,16 @@ if(isset($_POST['submit']) && isset($_POST['action']) && $_POST['action'] === 'a
     move_uploaded_file($file_tmp, $file_destination);
 
     // Insert data into database
-    $sql = "INSERT INTO tblcapstone (title, author, date_published, abstract, pdf_file, is_status) 
-            VALUES (:title, :author, :date_pub, :abstract, :pdf_file, :is_status)";
+    $sql = "INSERT INTO tblcapstone (title, author, date_published, projectAdviser, category, abstract, pdf_file, is_status) 
+            VALUES (:title, :author, :date_pub, :projectAdviser, :category, :abstract, :pdf_file, :is_status)";
 
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':title', $title);
     $stmt->bindParam(':author', $author);
     $stmt->bindParam(':date_pub', $date_pub);
     $stmt->bindParam(':abstract', $abstract);
+    $stmt->bindParam(':projectAdviser', $projectAdviser);
+    $stmt->bindParam(':category', $category);
     $stmt->bindParam(':pdf_file', $file_destination); // Store the file path
     $stmt->bindParam(':is_status', $status);
 
