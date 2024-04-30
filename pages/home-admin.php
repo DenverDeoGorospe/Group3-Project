@@ -70,10 +70,29 @@ if(isset($_REQUEST["logout"])){
         
     </ul>
     <div class="sidebar-footer mt-auto"> <!-- Added mt-auto to push the footer to the bottom -->
-        <a href="home-admin.php?logout=<?php echo $_SESSION["id"]; ?>" class="sidebar-link">
-            <i class="bi bi-box-arrow-left"></i>
-            <span>Logout</span>
-        </a>
+    <a href="#" class="sidebar-link" onclick="confirmLogout()"> <!-- Use "#" for href to prevent default navigation -->
+    <i class="bi bi-box-arrow-left"></i>
+    <span>Logout</span>
+</a>
+
+<script>
+function confirmLogout() {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You will be logged out.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect to logout URL
+            window.location.href = "home-admin.php?logout=<?php echo $_SESSION['id']; ?>";
+        }
+    });
+}
+</script>
     </div>
 </aside>
 
@@ -213,7 +232,8 @@ if(isset($_REQUEST["logout"])){
                                             <!-- Edit button -->
                                             <button type="button" class="btn btn-none edit-btn" onclick="openEditModal('<?php echo $capstone['id']; ?>', `<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', '<?php echo htmlspecialchars($capstone['projectAdviser']); ?>','<?php echo htmlspecialchars($capstone['category']); ?>',`<?php echo htmlspecialchars($capstone['abstract']); ?>`)">Edit</button>
                                             <!-- Delete button -->
-                                            <a href="?delete=<?php echo $capstone['id']; ?>" class="btn btn-none" onclick="propa(event);">Delete</a>
+                                            <a href="#" class="btn btn-none" onclick="confirmDelete(<?php echo $capstone['id']; ?>)">Delete</a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -299,7 +319,11 @@ if(isset($_REQUEST["logout"])){
                 </div>
                                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="submit">Save Changes</button>
+                    <form id="myForm">
+  <button type="submit" class="btn btn-primary" id="submitButton">Save Changes</button>
+</form>
+
+
                 </div>
 
 
@@ -348,7 +372,7 @@ if(isset($_REQUEST["logout"])){
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 
   function propa(event){
@@ -406,6 +430,28 @@ const hamBurger = document.querySelector(".toggle-btn");
 hamBurger.addEventListener("click", function () {
   document.querySelector("#sidebar").classList.toggle("expand");
 });
+
+</script>
+
+
+<!-- delete sweet alert -->
+<script>
+function confirmDelete(id) {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "error",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+  
+            window.location.href = "?delete=" + id;
+        }
+    });
+}
 
 </script>
 

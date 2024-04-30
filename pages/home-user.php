@@ -79,10 +79,29 @@ if(isset($_REQUEST["logout"])){
         
     </ul>
     <div class="sidebar-footer mt-auto"> <!-- Added mt-auto to push the footer to the bottom -->
-        <a href="home-admin.php?logout=<?php echo $_SESSION["id"]; ?>" class="sidebar-link">
-            <i class="bi bi-box-arrow-left"></i>
-            <span>Logout</span>
-        </a>
+    <a href="#" class="sidebar-link" onclick="confirmLogout()"> <!-- Use "#" for href to prevent default navigation -->
+    <i class="bi bi-box-arrow-left"></i>
+    <span>Logout</span>
+</a>
+
+<script>
+function confirmLogout() {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You will be logged out.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect to logout URL
+            window.location.href = "home-admin.php?logout=<?php echo $_SESSION['id']; ?>";
+        }
+    });
+}
+</script>
     </div>
 </aside>
 
