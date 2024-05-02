@@ -55,18 +55,22 @@ if(isset($_REQUEST["logout"])){
     </div>
     <ul class="sidebar-nav">
         <li class="sidebar-item">
+            <a href="#" class="sidebar-link text-center">
+            <span>
+            <?php echo $_SESSION['name']; ?>
+            </span>
+            <span><br>
+            <?php echo $_SESSION['accountType']; ?>
+            </span>
+            </a>
+        </li>
+        <li class="sidebar-item">
             <a href="../pages/home-admin.php" class="sidebar-link">
                 <i class="bi bi-house-door-fill"></i>
                 <span>Home</span>
             </a>
         </li>
        
-        <li class="sidebar-item">
-            <a href="../pages/profile-admin.php" class="sidebar-link">
-                <i class="bi bi-person-circle"></i>
-                <span>Profile</span>
-            </a>
-        </li>
         
     </ul>
     <div class="sidebar-footer mt-auto"> <!-- Added mt-auto to push the footer to the bottom -->
