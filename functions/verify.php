@@ -1,8 +1,12 @@
-<!-- 
-    - recryled code format
-    - no validation yet (incomplete validation)
--->
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
 <?php
 session_start();
 
@@ -55,29 +59,44 @@ if(isset($_POST["btn-login"])){
 				header("Location: ../pages/home-user.php");
 				exit();
             }else {
-				echo "
-        <script type=\"text/javascript\">
-            alert('Invalid Credentials');
-            history.back(1);
-        </script>
-            ";
-            
+				loginFailed();
 			}
 			
 		} else {
-			echo "
-        <script type=\"text/javascript\">
-            alert('Invalid Credentials');
-            history.back(1);
-        </script>
-            ";
+			loginFailed();
 		}
 	
 	}
 	
 } else {
-	header("Location: ../pages/home-admin.php");
-	exit();
+	loginFailed();
 }
 
+function loginSuccess() {
+    echo "<script>Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1500 
+    }).then(() => {
+        setTimeout(() => {
+            window.location.href = '../pages/home-admin.php';
+        }, 1500);
+    });</script>";
+}
+
+function loginFailed() {
+    echo "<script>Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Invalid Credentials',
+        timer: 1500,
+		showConfirmButton: false 
+    }).then(() => {      
+            history.back(1);
+    });</script>";
+}
 ?>
+</body>
+</html>
