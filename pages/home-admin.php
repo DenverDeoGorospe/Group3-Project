@@ -117,7 +117,7 @@ if(isset($_REQUEST["logout"])){
                 <label for="pdf_file">PDF File:</label>
                 <input type="file" class="form-control shadow-none text-white bg-secondary border-0 text-light" id="pdf_file" name="pdf_file" accept=".pdf" required>
             </div>
-            <button type="submit" class="btn btn-dark m-1" name="submit" style="float:right;">Add Capstone</button>
+            <button type="submit" class="btn btn-dark m-1" name="submit" style="float:right;" onclick="successAlert()">Add Capstone</button>
         </form>
     </div>
 </div>
