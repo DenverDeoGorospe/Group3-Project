@@ -2,7 +2,6 @@
 include('../functions/connection/dbconn.php');
 include('../functions/admin/get-admin.php');
 include('../functions/admin/add-admin.php');
-include('../functions/admin/edit-admin.php');
 include('../functions/admin/delete-admin.php');
 include('../functions/type.php');
 include('../functions/reset.php');
@@ -54,12 +53,13 @@ if(isset($_REQUEST["logout"])){
         </div>
     </div>
     <ul class="sidebar-nav">
-        <li class="sidebar-item">
+    <li class="sidebar-item">
             <a href="#" class="sidebar-link text-center">
+      
             <span>
             <?php echo $_SESSION['name']; ?>
             </span>
-            <span><br>
+            <span class="text-danger"><br>
             <?php echo $_SESSION['accountType']; ?>
             </span>
             </a>
@@ -74,10 +74,10 @@ if(isset($_REQUEST["logout"])){
         
     </ul>
     <div class="sidebar-footer mt-auto"> <!-- Added mt-auto to push the footer to the bottom -->
-    <a href="#" class="sidebar-link" onclick="confirmLogout()"> <!-- Use "#" for href to prevent default navigation -->
-    <i class="bi bi-box-arrow-left"></i>
-    <span>Logout</span>
-</a>
+        <a href="#" onclick="confirmLogout()" class="sidebar-link">
+            <i class="bi bi-box-arrow-left"></i>
+            <span>Logout</span>
+        </a>
     </div>
 </aside>
 
@@ -121,7 +121,7 @@ if(isset($_REQUEST["logout"])){
                 <label for="pdf_file">PDF File:</label>
                 <input type="file" class="form-control shadow-none text-white bg-secondary border-0 text-light" id="pdf_file" name="pdf_file" accept=".pdf" required>
             </div>
-            <button type="submit" class="btn btn-dark m-1" name="submit" style="float:right;" onclick="successAlert()">Add Capstone</button>
+            <button type="submit" class="btn btn-dark m-1" name="submit" style="float:right;">Add Capstone</button>
         </form>
     </div>
 </div>
@@ -218,7 +218,6 @@ if(isset($_REQUEST["logout"])){
                                             <button type="button" class="btn btn-none edit-btn" onclick="openEditModal('<?php echo $capstone['id']; ?>', `<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', '<?php echo htmlspecialchars($capstone['projectAdviser']); ?>','<?php echo htmlspecialchars($capstone['category']); ?>',`<?php echo htmlspecialchars($capstone['abstract']); ?>`)">Edit</button>
                                             <!-- Delete button -->
                                             <a href="#" class="btn btn-none" onclick="confirmDelete(<?php echo $capstone['id']; ?>)">Delete</a>
-
                                         </div>
                                     </div>
                                 </div>
@@ -260,6 +259,8 @@ if(isset($_REQUEST["logout"])){
    
     </div>
 </div>
+
+
     
 <!-- Modal for Editing -->
 <div class="modal fade" id="editModal">
@@ -304,11 +305,7 @@ if(isset($_REQUEST["logout"])){
                 </div>
                                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <form id="myForm">
-                        <button type="submit" class="btn btn-primary" id="submitButton">Save Changes</button>
-                        </form>
-
-
+                    <button type="submit" class="btn btn-primary" name="submit" onclick="editAlert()">Save Changes</button>
                 </div>
 
 
@@ -357,7 +354,7 @@ if(isset($_REQUEST["logout"])){
 </body>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 
   function propa(event){
@@ -415,6 +412,21 @@ const hamBurger = document.querySelector(".toggle-btn");
 hamBurger.addEventListener("click", function () {
   document.querySelector("#sidebar").classList.toggle("expand");
 });
+
+
+function editAlert(){
+Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 700 // Set the timer to 1.5 seconds
+    }).then(() => {
+        setTimeout(() => {
+            window.location.href = '../pages/home-admin.php';
+        }, 1500);
+    });
+}
 
 
 function confirmLogout() {
@@ -486,5 +498,3 @@ input.form-control:focus {
 
 </style>
 </html>
-
-

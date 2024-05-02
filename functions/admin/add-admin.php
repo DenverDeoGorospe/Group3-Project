@@ -54,11 +54,11 @@ function successAlert() {
         icon: 'success',
         title: 'Your work has been saved',
         showConfirmButton: false,
-        timer: 1500 // Set the timer to 1.5 seconds
+        timer: 1000 // Set the timer to 1.5 seconds
     }).then(() => {
         setTimeout(() => {
             window.location.href = '../pages/home-admin.php';
-        }, 1500);
+        });
     });</script>";
 }
 ?>

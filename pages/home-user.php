@@ -65,7 +65,7 @@ if(isset($_REQUEST["logout"])){
             <span>
             <?php echo $_SESSION['name']; ?>
             </span>
-            <span><br>
+            <span class="text-danger"><br>
             <?php echo $_SESSION['accountType']; ?>
             </span>
             </a>
