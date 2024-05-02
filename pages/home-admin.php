@@ -74,25 +74,6 @@ if(isset($_REQUEST["logout"])){
     <i class="bi bi-box-arrow-left"></i>
     <span>Logout</span>
 </a>
-
-<script>
-function confirmLogout() {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You will be logged out.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, logout"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Redirect to logout URL
-            window.location.href = "home-admin.php?logout=<?php echo $_SESSION['id']; ?>";
-        }
-    });
-}
-</script>
     </div>
 </aside>
 
@@ -308,7 +289,7 @@ function confirmLogout() {
                         <label for="category_modal">Category:</label>
                         <select class="form-control" id="category_modal" name="category" value="<?php echo isset($capstone['category']) ? $capstone['category'] : ''; ?>" required>
                                 <option value="">Select account type</option>
-                                <option value="Web-Applicaiton">Web</option>
+                                <option value="Web-Application">Web</option>
                                 <option value="Mobile-Application">Mobile</option>
                             </select>
                     </div>
@@ -320,8 +301,8 @@ function confirmLogout() {
                                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <form id="myForm">
-  <button type="submit" class="btn btn-primary" id="submitButton">Save Changes</button>
-</form>
+                        <button type="submit" class="btn btn-primary" id="submitButton">Save Changes</button>
+                        </form>
 
 
                 </div>
@@ -431,12 +412,27 @@ hamBurger.addEventListener("click", function () {
   document.querySelector("#sidebar").classList.toggle("expand");
 });
 
-</script>
+
+function confirmLogout() {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You will be logged out.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect to logout URL
+            window.location.href = "home-admin.php?logout=<?php echo $_SESSION['id']; ?>";
+        }
+    });
+}
 
 
-<!-- delete sweet alert -->
-<script>
 function confirmDelete(id) {
+    propa(event);
     Swal.fire({
         title: "Are you sure?",
         text: "You won't be able to revert this!",

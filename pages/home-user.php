@@ -83,25 +83,6 @@ if(isset($_REQUEST["logout"])){
     <i class="bi bi-box-arrow-left"></i>
     <span>Logout</span>
 </a>
-
-<script>
-function confirmLogout() {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "You will be logged out.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, logout"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            // Redirect to logout URL
-            window.location.href = "home-admin.php?logout=<?php echo $_SESSION['id']; ?>";
-        }
-    });
-}
-</script>
     </div>
 </aside>
 
@@ -340,12 +321,31 @@ hamBurger.addEventListener("click", function () {
 });
 
 
+function confirmLogout() {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You will be logged out.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect to logout URL
+            window.location.href = "home-user.php?logout=<?php echo $_SESSION['id']; ?>";
+        }
+    });
+}
+
+
 
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 
 input.form-control {
