@@ -87,7 +87,7 @@ function loginSuccess() {
 }
 
 function loginFailed() {
-    echo "<script>Swal.fire({
+    echo "<script type=\"text/javascript\">Swal.fire({
         position: 'center',
         icon: 'error',
         title: 'Invalid Credentials',
