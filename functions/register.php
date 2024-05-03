@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
 <?php
 include('../functions/connection/dbconn.php');
 
@@ -19,11 +27,26 @@ if(isset($_POST['action']) && $_POST['action'] === 'add') {
 
     try {
         $stmt->execute();
-        header("Location:../pages/login.php");
-        exit;
+        registerAlert();
     } catch(PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
 }
 
+function registerAlert() {
+    echo "<script>Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Registered Successfully!',
+        showConfirmButton: false,
+        timer: 1500 
+    }).then(() => {
+            window.location.href = '../pages/login.php';
+    });</script>";
+}
+
 ?>
+</body>
+</html>
+
+
