@@ -333,7 +333,7 @@ function confirmLogout() {
         text: "You will be logged out.",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#212529",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, logout"
     }).then((result) => {

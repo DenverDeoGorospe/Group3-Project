@@ -435,7 +435,7 @@ function confirmLogout() {
         text: "You will be logged out.",
         icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#212529",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, logout"
     }).then((result) => {
@@ -454,7 +454,7 @@ function confirmDelete(id) {
         text: "You won't be able to revert this!",
         icon: "error",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
+        confirmButtonColor: "#212529",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!"
     }).then((result) => {
