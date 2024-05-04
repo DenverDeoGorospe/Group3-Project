@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
 <?php
 include('../functions/connection/dbconn.php');
 
@@ -34,10 +43,24 @@ if(isset($_POST['submit']) && isset($_POST['action']) && $_POST['action'] === 'a
 
     try {
         $stmt->execute();
-        header("Location: ../pages/home-admin.php");
-        exit;
+        successAlert(); // Call the function here
     } catch(PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
 }
+function successAlert() {
+    echo "<script>Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1000 // Set the timer to 1.5 seconds
+    }).then(() => {
+        setTimeout(() => {
+            window.location.href = '../pages/home-admin.php';
+        });
+    });</script>";
+}
 ?>
+</body>
+</html>

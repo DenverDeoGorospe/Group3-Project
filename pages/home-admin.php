@@ -2,7 +2,6 @@
 include('../functions/connection/dbconn.php');
 include('../functions/admin/get-admin.php');
 include('../functions/admin/add-admin.php');
-include('../functions/admin/edit-admin.php');
 include('../functions/admin/delete-admin.php');
 include('../functions/type.php');
 include('../functions/reset.php');
@@ -54,6 +53,17 @@ if(isset($_REQUEST["logout"])){
         </div>
     </div>
     <ul class="sidebar-nav">
+    <li class="sidebar-item">
+            <a href="#" class="sidebar-link text-center">
+      
+            <span>
+            <?php echo $_SESSION['name']; ?>
+            </span>
+            <span class="text-danger"><br>
+            <?php echo $_SESSION['accountType']; ?>
+            </span>
+            </a>
+        </li>
         <li class="sidebar-item">
             <a href="../pages/home-admin.php" class="sidebar-link">
                 <i class="bi bi-house-door-fill"></i>
@@ -61,16 +71,10 @@ if(isset($_REQUEST["logout"])){
             </a>
         </li>
        
-        <li class="sidebar-item">
-            <a href="../pages/profile-admin.php" class="sidebar-link">
-                <i class="bi bi-person-circle"></i>
-                <span>Profile</span>
-            </a>
-        </li>
         
     </ul>
     <div class="sidebar-footer mt-auto"> <!-- Added mt-auto to push the footer to the bottom -->
-        <a href="home-admin.php?logout=<?php echo $_SESSION["id"]; ?>" class="sidebar-link">
+        <a href="#" onclick="confirmLogout()" class="sidebar-link">
             <i class="bi bi-box-arrow-left"></i>
             <span>Logout</span>
         </a>
@@ -213,7 +217,7 @@ if(isset($_REQUEST["logout"])){
                                             <!-- Edit button -->
                                             <button type="button" class="btn btn-none edit-btn" onclick="openEditModal('<?php echo $capstone['id']; ?>', `<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', '<?php echo htmlspecialchars($capstone['projectAdviser']); ?>','<?php echo htmlspecialchars($capstone['category']); ?>',`<?php echo htmlspecialchars($capstone['abstract']); ?>`)">Edit</button>
                                             <!-- Delete button -->
-                                            <a href="?delete=<?php echo $capstone['id']; ?>" class="btn btn-none" onclick="propa(event);">Delete</a>
+                                            <a href="#" class="btn btn-none" onclick="confirmDelete(<?php echo $capstone['id']; ?>)">Delete</a>
                                         </div>
                                     </div>
                                 </div>
@@ -255,6 +259,8 @@ if(isset($_REQUEST["logout"])){
    
     </div>
 </div>
+
+
     
 <!-- Modal for Editing -->
 <div class="modal fade" id="editModal">
@@ -288,7 +294,7 @@ if(isset($_REQUEST["logout"])){
                         <label for="category_modal">Category:</label>
                         <select class="form-control" id="category_modal" name="category" value="<?php echo isset($capstone['category']) ? $capstone['category'] : ''; ?>" required>
                                 <option value="">Select account type</option>
-                                <option value="Web-Applicaiton">Web</option>
+                                <option value="Web-Application">Web</option>
                                 <option value="Mobile-Application">Mobile</option>
                             </select>
                     </div>
@@ -299,7 +305,7 @@ if(isset($_REQUEST["logout"])){
                 </div>
                                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" name="submit">Save Changes</button>
+                    <button type="submit" class="btn btn-primary" name="submit" onclick="editAlert()">Save Changes</button>
                 </div>
 
 
@@ -407,6 +413,58 @@ hamBurger.addEventListener("click", function () {
   document.querySelector("#sidebar").classList.toggle("expand");
 });
 
+
+function editAlert(){
+Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 700 // Set the timer to 1.5 seconds
+    }).then(() => {
+        setTimeout(() => {
+            window.location.href = '../pages/home-admin.php';
+        }, 1500);
+    });
+}
+
+
+function confirmLogout() {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You will be logged out.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#212529",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect to logout URL
+            window.location.href = "home-admin.php?logout=<?php echo $_SESSION['id']; ?>";
+        }
+    });
+}
+
+
+function confirmDelete(id) {
+    propa(event);
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "error",
+        showCancelButton: true,
+        confirmButtonColor: "#212529",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+  
+            window.location.href = "?delete=" + id;
+        }
+    });
+}
+
 </script>
 
 <style>
@@ -440,5 +498,3 @@ input.form-control:focus {
 
 </style>
 </html>
-
-

@@ -57,7 +57,19 @@ if(isset($_REQUEST["logout"])){
             <a href="#">Menu</a>
         </div>
     </div>
+
     <ul class="sidebar-nav">
+         <li class="sidebar-item">
+            <a href="#" class="sidebar-link text-center">
+      
+            <span>
+            <?php echo $_SESSION['name']; ?>
+            </span>
+            <span class="text-danger"><br>
+            <?php echo $_SESSION['accountType']; ?>
+            </span>
+            </a>
+        </li>
         <li class="sidebar-item">
             <a href="../pages/home-user.php" class="sidebar-link">
                 <i class="bi bi-house-door-fill"></i>
@@ -70,19 +82,13 @@ if(isset($_REQUEST["logout"])){
                 <span>Favorites</span>
             </a>
         </li>
-        <li class="sidebar-item">
-            <a href="../pages/profile-user.php" class="sidebar-link">
-                <i class="bi bi-person-circle"></i>
-                <span>Profile</span>
-            </a>
-        </li>
         
     </ul>
     <div class="sidebar-footer mt-auto"> <!-- Added mt-auto to push the footer to the bottom -->
-        <a href="home-admin.php?logout=<?php echo $_SESSION["id"]; ?>" class="sidebar-link">
-            <i class="bi bi-box-arrow-left"></i>
-            <span>Logout</span>
-        </a>
+    <a href="#" class="sidebar-link" onclick="confirmLogout()"> <!-- Use "#" for href to prevent default navigation -->
+    <i class="bi bi-box-arrow-left"></i>
+    <span>Logout</span>
+</a>
     </div>
 </aside>
 
@@ -321,12 +327,31 @@ hamBurger.addEventListener("click", function () {
 });
 
 
+function confirmLogout() {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You will be logged out.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#212529",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, logout"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Redirect to logout URL
+            window.location.href = "home-user.php?logout=<?php echo $_SESSION['id']; ?>";
+        }
+    });
+}
+
+
 
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <style>
 
 input.form-control {
