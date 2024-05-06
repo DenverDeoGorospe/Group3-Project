@@ -39,6 +39,7 @@ if(isset($_REQUEST["logout"])){
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -137,12 +138,13 @@ if(isset($_REQUEST["logout"])){
                         <div class="row bg-light">
                             <div class="col-sm-12 text-center">
                                 <div style="display: inline-block; width:75%;">
-                                    <div class="input-group m-3">
-                                        <input type="text" class="form-control shadow-none" id="capSearch" placeholder="Search" name="forSearch" value="<?php echo (isset($searchVal))? $searchVal: null;?>">
-                                        <button type="submit" name="capSearch" value="SEARCH" class="btn btn-primary rounded-pill text-light bg-dark border-none" style="border:none;">
-                                            <i class="bi bi-search"></i>
-                                        </button>
-                                    </div>
+                                <div class="input-group m-3">
+    <input type="text" class="form-control shadow-none" id="capSearch" placeholder="Search" name="forSearch" value="<?php echo (isset($searchVal))? $searchVal: null;?>">
+    <button type="submit" name="capSearch" value="SEARCH" class="btn btn-primary rounded-pill text-light bg-dark border-none" style="border:none;">
+        <i class="bi bi-search"></i>
+    </button>
+</div>
+<ul id="suggestions" class="list-group"></ul>
                                 </div>
                             </div>
                         </div>
@@ -465,6 +467,34 @@ function confirmDelete(id) {
     });
 }
 
+$(document).ready(function(){
+    $('#capSearch').on('input', function() {
+        var input = $(this).val();
+        $.ajax({
+            url: '../functions/getSuggestions.php',
+            method: 'GET',
+            data: { input: input },
+            dataType: 'json',
+            success: function(response) {
+                var suggestions = response;
+                $('#suggestions').empty();
+
+                suggestions.forEach(function(item) {
+                    $('#suggestions').append('<li class="suggestion">' + item.title + '</li>');
+                });
+
+                $('#suggestions').show();
+            }
+        });
+    });
+
+    $(document).on('click', '.suggestion', function() {
+        var suggestionText = $(this).text();
+        $('#capSearch').val(suggestionText);
+        $('#suggestions').hide();
+    });
+});
+
 </script>
 
 <style>
@@ -494,6 +524,9 @@ input.form-control:focus {
     margin-top: auto;
     width:100%;
 
+}
+#suggestions li {
+    cursor: pointer;
 }
 
 </style>
