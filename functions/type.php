@@ -21,6 +21,14 @@ else if($searchVal != null && $fromdate != null && $todate != null && $catego !=
     $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND category = '$catego' AND is_status = '1'");
 }
 
+if($catego == 'Web-Application'){
+    $selected = 'Web';
+}elseif($catego == 'Mobile-Application'){
+    $selected = 'Mobile';
+}else{
+    $selected = 'Select';
+}
+
 $stmt->execute();
 $searchCapstone = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
