@@ -16,24 +16,22 @@ if($catego == 'Web-Application'){
 }
 
 if($searchVal == null && $fromdate == null && $todate == null && $catego == null){
-    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE is_status = '1'");
+    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE is_status = '1' ORDER BY date_published DESC");
 }else if($fromdate == null && $todate == null && $catego == null){
-    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE title LIKE '%$searchVal%' AND is_status = '1'");
+    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE title LIKE '%$searchVal%' AND is_status = '1' ORDER BY date_published DESC");
 }else if($fromdate == null && $todate == null && $searchVal == null && $catego != null){
    
-    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE category = '$catego' AND is_status = '1'");
+    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE category = '$catego' AND is_status = '1' ORDER BY date_published DESC");
 }else if($fromdate != null && $todate != null && $searchVal == null && $catego == null){
-    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND is_status = '1'");
+    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND is_status = '1' ORDER BY date_published DESC");
 }
 else if($searchVal != null && $fromdate != null && $todate != null && $catego != null){
     
-    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND title LIKE '%$searchVal%' AND category = '$catego' AND is_status = '1'");
+    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND title LIKE '%$searchVal%' AND category = '$catego' AND is_status = '1' ORDER BY date_published DESC");
 }else{
     
-    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND category = '$catego' AND is_status = '1'");
+    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND category = '$catego' AND is_status = '1' ORDER BY date_published DESC");
 }
-
-
 
 $stmt->execute();
 $searchCapstone = $stmt->fetchAll(PDO::FETCH_ASSOC);
