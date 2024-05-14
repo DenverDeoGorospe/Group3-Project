@@ -16,7 +16,7 @@ if($searchVal == null && $fromdate == null && $todate == null && $catego == null
     $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND is_status = '1'");
 }
 else if($searchVal != null && $fromdate != null && $todate != null && $catego != null){
-    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND title LIKE '%$searchVal%' AND category = $catego AND is_status = '1'");
+    $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND title LIKE '%$searchVal%' AND category = '$catego' AND is_status = '1'");
 }else{
     $stmt = $conn->prepare("SELECT * FROM tblcapstone WHERE date_published BETWEEN '$fromdate' AND '$todate' AND category = '$catego' AND is_status = '1'");
 }
