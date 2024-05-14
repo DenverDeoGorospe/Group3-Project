@@ -14,39 +14,59 @@ if(isset($_POST['action']) && $_POST['action'] === 'add') {
     $studentId = $_POST['studentId'];
     $accountType = $_POST['accountType'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $password = $_POST['password'];
 
-    $sql = "INSERT INTO tbl_register (name, studentId, accountType, email, password) VALUES (:name, :studentId, :accountType, :email ,:password)";
+    // Password validation pattern
+    $passwordPattern = "/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/";
 
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':studentId', $studentId);
-    $stmt->bindParam(':accountType', $accountType);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $password);
+    // Validate password
+    if (!preg_match($passwordPattern, $password)) {
+        echo "
+        <script type=\"text/javascript\">
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'weak password.',
+                showConfirmButton: true
+            }).then(() => {
+                history.back();
+            });
+        </script>
+        ";
+    } else {
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
 
-    try {
-        $stmt->execute();
-        registerAlert();
-    } catch(PDOException $e) {
-        echo "Error: " . $e->getMessage();
+        $sql = "INSERT INTO tbl_register (name, studentId, accountType, email, password) VALUES (:name, :studentId, :accountType, :email, :password)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':studentId', $studentId);
+        $stmt->bindParam(':accountType', $accountType);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $hashedPassword);
+
+        try {
+            $stmt->execute();
+            registerAlert();
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
     }
 }
 
 function registerAlert() {
-    echo "<script>Swal.fire({
-        position: 'center',
-        icon: 'success',
-        title: 'Registered Successfully!',
-        showConfirmButton: false,
-        timer: 1500 
-    }).then(() => {
+    echo "<script>
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Registered Successfully!',
+            showConfirmButton: false,
+            timer: 1500 
+        }).then(() => {
             window.location.href = '../pages/login.php';
-    });</script>";
+        });
+    </script>";
 }
-
 ?>
 </body>
 </html>
-
-
