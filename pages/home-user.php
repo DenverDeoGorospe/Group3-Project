@@ -120,7 +120,7 @@ if(isset($_REQUEST["logout"])){
                             <div class="form-group d-flex p-1">
                                 <label for="category" class="p-1">Category</label>
                                 <select class="form-control shadow-none" name="category" id="category">
-                                        <option hidden><?php echo $selected ?></option>
+                                        <option hidden>Select</option>
                                         <option value="Web-Application">Web</option>
                                         <option value="Mobile-Application">Mobile</option>
                                     </select>
