@@ -1,6 +1,5 @@
 <?php
 include('../functions/connection/dbconn.php');
-include('../functions/admin/get-admin.php');
 include('../functions/admin/add-admin.php');
 include('../functions/admin/edit-admin.php');
 include('../functions/admin/delete-admin.php');
@@ -120,7 +119,7 @@ if(isset($_REQUEST["logout"])){
                             <div class="form-group d-flex p-1">
                                 <label for="category" class="p-1">Category</label>
                                 <select class="form-control shadow-none" name="category" id="category">
-                                        <option hidden><?php echo $selected ?></option>
+                                        <option hidden value=""><?php echo $selected ?></option>
                                         <option value="Web-Application">Web</option>
                                         <option value="Mobile-Application">Mobile</option>
                                     </select>

@@ -26,7 +26,7 @@ if(isset($_POST['action']) && $_POST['action'] === 'add') {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
-                title: 'weak password.',
+                title: 'Weak Password.',
                 showConfirmButton: true
             }).then(() => {
                 history.back();
