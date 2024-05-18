@@ -1,10 +1,9 @@
 <?php
 include('../functions/connection/dbconn.php');
 include('../functions/fave-get.php');
-?>
 
-<?php
-session_start();
+
+
 
 if(!isset($_SESSION["id"])){
 	header("location: ../pages/index.php"); 
@@ -22,6 +21,7 @@ if(isset($_REQUEST["logout"])){
 	header("location: ../pages/index.php");
 	exit();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -125,10 +125,13 @@ if(isset($_REQUEST["logout"])){
 
                   foreach($favorite as $capstone): 
                         $pdf_file = $capstone['pdf_file'];
+
+
                     ?>
+                    
                         <div class="col-sm-4 mb-4">
                             <div class="card bg-light h-100" onclick="openViewModal(`<?php echo htmlspecialchars($capstone['title']); ?>`, '<?php echo htmlspecialchars($capstone['author']); ?>', '<?php echo htmlspecialchars($capstone['date_published']); ?>', '<?php echo htmlspecialchars($capstone['projectAdviser']); ?>','<?php echo htmlspecialchars($capstone['category']); ?>',`<?php echo htmlspecialchars($capstone['abstract']); ?>`,event)"> 
-                            <a href="../functions/fave-delete.php?delete=<?php echo $capstone['id']; ?>" class="btn btn-none fs-5 text-right position-absolute top-0 end-0 p-3 favorite-icon" onclick="propa(event)"><i class="bi bi-heart-fill text-danger"></i></a>
+                            <a href="../functions/fave-delete.php?id=<?php echo $capstone['id']; ?>" class="btn btn-none fs-5 text-right position-absolute top-0 end-0 p-3 favorite-icon" onclick="propa(event)"><i class="bi bi-heart-fill text-danger"></i></a>
                                 <div class="card-body d-flex flex-column"> <!-- Added flex-column class to align content vertically -->
                                     <label for="title" class="font-weight-bold">Title</label>
                                     <h5 class="card-title text-truncate"><?php echo $capstone['title']; ?></h5>
