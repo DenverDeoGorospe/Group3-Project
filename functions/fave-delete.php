@@ -7,7 +7,7 @@ if(isset($_GET['id'])) {
     $capstoneid = $_GET['id'];
     $userid = $_SESSION['id'];
 
-    $sql = "DELETE FROM tbl_favorite WHERE capstoneID = :capstoneid AND userID = :userid";
+    $sql = "DELETE FROM tbl_favorite WHERE id = :capstoneid AND userID = :userid";
 
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':capstoneid', $capstoneid);
